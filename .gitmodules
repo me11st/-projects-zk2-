@@ -1,0 +1,3 @@
+[submodule "projects/coolProjectName/PLottery/lib/forge-std"]
+	path = projects/coolProjectName/PLottery/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
