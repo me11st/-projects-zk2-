@@ -112,10 +112,7 @@ export default function Home() {
               <Lock className="h-10 w-10 text-blue-400" />
             </div>
             <h3 className="text-xl font-bold text-white mb-3">Bundle & Encrypt</h3>
-            <p className="text-gray-400 mb-6">Combine entire payroll into one private transaction</p>
-            <p className="text-gray-400 text-sm">
-              Secure hardware enclaves process payments privately, sending to one-time addresses only employees can access.
-            </p>
+            <p className="text-gray-400 mb-6">Secure hardware enclaves process payments privately, sending to one-time addresses only employees can access.</p>
           </Card>
 
           <Card className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-teal-500/10 hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/20 border border-green-400/20 hover:border-green-400/40 p-8 text-center shadow-2xl shadow-green-500/10 hover:shadow-green-500/20 transition-all duration-300">
@@ -123,10 +120,7 @@ export default function Home() {
               <Shield className="h-10 w-10 text-green-400" />
             </div>
             <h3 className="text-xl font-bold text-white mb-3">Prove Compliance</h3>
-            <p className="text-gray-400 mb-6">Mathematical proofs without revealing details</p>
-            <p className="text-gray-400 text-sm">
-              Zero-knowledge proofs verify total amounts and legal compliance while keeping individual salaries private.
-            </p>
+            <p className="text-gray-400 mb-6">Zero-knowledge proofs verify total amounts and legal compliance while keeping individual salaries private.</p>
           </Card>
 
           <Card className="backdrop-blur-xl bg-gradient-to-br from-purple-500/10 via-violet-500/5 to-fuchsia-500/10 hover:from-purple-500/20 hover:via-violet-500/10 hover:to-fuchsia-500/20 border border-purple-400/20 hover:border-purple-400/40 p-8 text-center shadow-2xl shadow-purple-500/10 hover:shadow-purple-500/20 transition-all duration-300">
@@ -134,10 +128,7 @@ export default function Home() {
               <Users className="h-10 w-10 text-purple-400" />
             </div>
             <h3 className="text-xl font-bold text-white mb-3">Simple Experience</h3>
-            <p className="text-gray-400 mb-6">Easy for HR, employees, and auditors</p>
-            <p className="text-gray-400 text-sm">
-              Upload CSV, scan for payments, verify proofs - all with intuitive interfaces that hide complexity.
-            </p>
+            <p className="text-gray-400 mb-6">Upload CSV, scan for payments, verify proofs - all with intuitive interfaces that hide complexity.</p>
           </Card>
         </div>
       </section>
