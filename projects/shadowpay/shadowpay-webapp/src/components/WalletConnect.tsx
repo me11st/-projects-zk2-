@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ChevronDown, Wallet, Copy, Download, LogOut, Check, Eye, EyeOff } from "lucide-react"
@@ -23,6 +24,14 @@ export function ShadowConnect() {
   const [showDropdown, setShowDropdown] = useState(false)
   const [copied, setCopied] = useState(false)
   const [showBalance, setShowBalance] = useState(false)
+  const pathname = usePathname()
+
+  // Auto-connect wallet if we're on the dashboard (simulating wallet loaded state)
+  useEffect(() => {
+    if (pathname === '/employee/dashboard') {
+      setWallet({ ...mockWallet, isConnected: true })
+    }
+  }, [pathname])
 
   const formatAddress = (addr: string) => {
     return `${addr.slice(0, 8)}...${addr.slice(-8)}`
@@ -43,16 +52,20 @@ export function ShadowConnect() {
   const handleDisconnect = () => {
     setWallet({ ...wallet, isConnected: false })
     setShowDropdown(false)
+    // Clear authentication data
+    localStorage.removeItem('shadowpay-wallet-setup')
+    // Redirect to sign-in page after disconnect
+    window.location.href = '/sign-in'
   }
 
   if (!wallet.isConnected) {
     return (
       <Button
-        onClick={() => setWallet({ ...wallet, isConnected: true })}
+        onClick={() => window.location.href = '/employee'}
         className="h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center space-x-2"
       >
         <Wallet className="h-4 w-4" />
-        <span>Connect ShadowPay</span>
+        <span>Wallet not loaded</span>
       </Button>
     )
   }

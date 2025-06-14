@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { Shield, Upload, Play, Users, Settings } from "lucide-react"
 import { ConnectWallet } from '@/components/ConnectWallet'
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
 
