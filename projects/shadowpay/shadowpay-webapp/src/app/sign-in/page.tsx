@@ -4,13 +4,26 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Shield, Users, Zap, FileCheck, X } from "lucide-react"
 import Link from "next/link"
-import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { useAccount } from 'wagmi'
+import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function SignInPage() {
   const [selectedRole, setSelectedRole] = useState<'employer' | 'employee' | 'auditor' | null>(null)
   const router = useRouter()
+  const { isConnected } = useAccount()
+  const { openConnectModal } = useConnectModal()
+
+  const handleRoleClick = (role: 'employer' | 'employee' | 'auditor') => {
+    setSelectedRole(role)
+    if (!isConnected) {
+      openConnectModal?.()
+    } else {
+      // Navigate to appropriate dashboard
+      router.push(`/${role === 'auditor' ? 'audit' : role}`)
+    }
+  }
 
   return (
     <div className="dark min-h-screen bg-black">
@@ -42,7 +55,10 @@ export default function SignInPage() {
           {/* Role Selection Cards */}
           <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Employer Card */}
-            <Card className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-teal-500/10 hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/20 border border-green-400/20 hover:border-green-400/40 p-8 text-center shadow-2xl shadow-green-500/10 hover:shadow-green-500/20 transition-all duration-300 group">
+            <Card 
+              className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-teal-500/10 hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/20 border border-green-400/20 hover:border-green-400/40 p-8 text-center shadow-2xl shadow-green-500/10 hover:shadow-green-500/20 transition-all duration-300 group cursor-pointer"
+              onClick={() => handleRoleClick('employer')}
+            >
               <div className="w-20 h-20 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Users className="h-10 w-10 text-green-400" />
               </div>
@@ -50,56 +66,15 @@ export default function SignInPage() {
               <div className="h-16 flex items-center justify-center mb-8">
                 <p className="text-gray-400 text-center">Manage payroll, run secure payments, and maintain employee privacy</p>
               </div>
-              <ConnectButton.Custom>
-                {({ account, chain, openConnectModal, mounted }) => {
-                  const ready = mounted
-                  const connected = ready && account && chain
-
-                  return (
-                    <div
-                      {...(!ready && {
-                        'aria-hidden': true,
-                        'style': {
-                          opacity: 0,
-                          pointerEvents: 'none',
-                          userSelect: 'none',
-                        },
-                      })}
-                    >
-                      {(() => {
-                        if (!connected) {
-                          return (
-                            <Button 
-                              onClick={() => {
-                                setSelectedRole('employer')
-                                openConnectModal()
-                              }}
-                              className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-                            >
-                              Continue as Employer
-                            </Button>
-                          )
-                        }
-
-                        return (
-                                                      <Button 
-                              onClick={() => {
-                                console.log('Connected as employer:', account.address)
-                                router.push('/employer')
-                              }}
-                              className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-                            >
-                              Enter Employer Portal
-                            </Button>
-                        )
-                      })()}
-                    </div>
-                  )
-                }}
-              </ConnectButton.Custom>
+              <div className="text-sm text-green-400 font-medium">
+                {isConnected ? 'Enter Employer Portal →' : 'Click to Connect & Continue →'}
+              </div>
             </Card>
 
-            <Card className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-indigo-500/10 hover:from-blue-500/20 hover:via-cyan-500/10 hover:to-indigo-500/20 border border-blue-400/20 hover:border-blue-400/40 p-8 text-center shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-all duration-300 group">
+            <Card 
+              className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-indigo-500/10 hover:from-blue-500/20 hover:via-cyan-500/10 hover:to-indigo-500/20 border border-blue-400/20 hover:border-blue-400/40 p-8 text-center shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-all duration-300 group cursor-pointer"
+              onClick={() => handleRoleClick('employee')}
+            >
               <div className="w-20 h-20 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Zap className="h-10 w-10 text-blue-400" />
               </div>
@@ -107,57 +82,16 @@ export default function SignInPage() {
               <div className="h-16 flex items-center justify-center mb-8">
                 <p className="text-gray-400 text-center">Access your private salary, scan for payments, and generate income proofs</p>
               </div>
-              <ConnectButton.Custom>
-                {({ account, chain, openConnectModal, mounted }) => {
-                  const ready = mounted
-                  const connected = ready && account && chain
-
-                  return (
-                    <div
-                      {...(!ready && {
-                        'aria-hidden': true,
-                        'style': {
-                          opacity: 0,
-                          pointerEvents: 'none',
-                          userSelect: 'none',
-                        },
-                      })}
-                    >
-                      {(() => {
-                        if (!connected) {
-                          return (
-                            <Button 
-                              onClick={() => {
-                                setSelectedRole('employee')
-                                openConnectModal()
-                              }}
-                              className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-                            >
-                              Continue as Employee
-                            </Button>
-                          )
-                        }
-
-                        return (
-                          <Button 
-                            onClick={() => {
-                              console.log('Connected as employee:', account.address)
-                              router.push('/employee')
-                            }}
-                            className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-                          >
-                            Enter Employee Portal
-                          </Button>
-                        )
-                      })()}
-                    </div>
-                  )
-                }}
-              </ConnectButton.Custom>
+              <div className="text-sm text-blue-400 font-medium">
+                {isConnected ? 'Enter Employee Portal →' : 'Click to Connect & Continue →'}
+              </div>
             </Card>
 
             {/* Auditor Card */}
-            <Card className="backdrop-blur-xl bg-gradient-to-br from-purple-500/10 via-violet-500/5 to-fuchsia-500/10 hover:from-purple-500/20 hover:via-violet-500/10 hover:to-fuchsia-500/20 border border-purple-400/20 hover:border-purple-400/40 p-8 text-center shadow-2xl shadow-purple-500/10 hover:shadow-purple-500/20 transition-all duration-300 group">
+            <Card 
+              className="backdrop-blur-xl bg-gradient-to-br from-purple-500/10 via-violet-500/5 to-fuchsia-500/10 hover:from-purple-500/20 hover:via-violet-500/10 hover:to-fuchsia-500/20 border border-purple-400/20 hover:border-purple-400/40 p-8 text-center shadow-2xl shadow-purple-500/10 hover:shadow-purple-500/20 transition-all duration-300 group cursor-pointer"
+              onClick={() => handleRoleClick('auditor')}
+            >
               <div className="w-20 h-20 bg-gradient-to-br from-purple-400/20 to-violet-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <FileCheck className="h-10 w-10 text-purple-400" />
               </div>
@@ -165,53 +99,9 @@ export default function SignInPage() {
               <div className="h-16 flex items-center justify-center mb-8">
                 <p className="text-gray-400 text-center">Verify compliance, validate proofs, and ensure regulatory adherence</p>
               </div>
-              <ConnectButton.Custom>
-                {({ account, chain, openConnectModal, mounted }) => {
-                  const ready = mounted
-                  const connected = ready && account && chain
-
-                  return (
-                    <div
-                      {...(!ready && {
-                        'aria-hidden': true,
-                        'style': {
-                          opacity: 0,
-                          pointerEvents: 'none',
-                          userSelect: 'none',
-                        },
-                      })}
-                    >
-                      {(() => {
-                        if (!connected) {
-                          return (
-                            <Button 
-                              onClick={() => {
-                                setSelectedRole('auditor')
-                                openConnectModal()
-                              }}
-                              className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-                            >
-                              Continue as Auditor
-                            </Button>
-                          )
-                        }
-
-                        return (
-                          <Button 
-                            onClick={() => {
-                              console.log('Connected as auditor:', account.address)
-                              router.push('/audit')
-                            }}
-                            className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-                          >
-                            Enter Auditor Portal
-                          </Button>
-                        )
-                      })()}
-                    </div>
-                  )
-                }}
-              </ConnectButton.Custom>
+              <div className="text-sm text-purple-400 font-medium">
+                {isConnected ? 'Enter Auditor Portal →' : 'Click to Connect & Continue →'}
+              </div>
             </Card>
           </div>
 

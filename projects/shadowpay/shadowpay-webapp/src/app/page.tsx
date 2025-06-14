@@ -20,7 +20,7 @@ export default function Home() {
             <a href="#solution" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">Solution</a>
             <a href="#about" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">About</a>
             <Link href="/sign-in">
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-5 py-1.5 font-semibold text-sm">Open App</Button>
+              <Button className="h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-5 font-semibold text-sm rounded-xl">Open App</Button>
             </Link>
           </div>
         </div>
@@ -42,13 +42,13 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/sign-in">
-            <Button size="lg" className="text-lg px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
-              <Zap className="mr-2 h-5 w-5" />
+            <Button className="!h-12 !bg-gradient-to-r !from-blue-600 !to-purple-600 hover:!from-blue-700 hover:!to-purple-700 !text-white !px-12 !font-semibold !text-sm !rounded-xl !shadow-lg hover:!shadow-xl !transition-all !duration-200 !inline-flex !items-center !justify-center !gap-2">
+              <Zap className="h-4 w-4" />
               Open App
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="text-lg px-10 py-4 border-gray-600 text-gray-300 hover:bg-gray-900 hover:text-white transition-all duration-200">
-            <FileCheck className="mr-2 h-5 w-5" />
+          <Button variant="outline" className="!h-12 !border-gray-600 !text-gray-300 hover:!bg-gray-900 hover:!text-white !px-12 !font-semibold !text-sm !rounded-xl !transition-all !duration-200 !inline-flex !items-center !justify-center !gap-2">
+            <FileCheck className="h-4 w-4" />
             Learn More
           </Button>
         </div>
