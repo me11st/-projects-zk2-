@@ -6,9 +6,11 @@ import { Shield, Users, Zap, FileCheck, X } from "lucide-react"
 import Link from "next/link"
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function SignInPage() {
   const [selectedRole, setSelectedRole] = useState<'employer' | 'employee' | 'auditor' | null>(null)
+  const router = useRouter()
 
   return (
     <div className="dark min-h-screen bg-black">
@@ -80,14 +82,15 @@ export default function SignInPage() {
                         }
 
                         return (
-                          <Button 
-                            onClick={() => {
-                              console.log('Connected as employer:', account.address)
-                            }}
-                            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-                          >
-                            Enter Employer Portal
-                          </Button>
+                                                      <Button 
+                              onClick={() => {
+                                console.log('Connected as employer:', account.address)
+                                router.push('/employer')
+                              }}
+                              className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                            >
+                              Enter Employer Portal
+                            </Button>
                         )
                       })()}
                     </div>
@@ -139,6 +142,7 @@ export default function SignInPage() {
                           <Button 
                             onClick={() => {
                               console.log('Connected as employee:', account.address)
+                              router.push('/employee')
                             }}
                             className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                           >
@@ -196,6 +200,7 @@ export default function SignInPage() {
                           <Button 
                             onClick={() => {
                               console.log('Connected as auditor:', account.address)
+                              router.push('/audit')
                             }}
                             className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                           >

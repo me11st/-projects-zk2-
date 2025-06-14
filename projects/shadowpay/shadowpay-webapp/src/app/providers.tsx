@@ -8,7 +8,7 @@ import {
 import { WagmiProvider } from 'wagmi'
 import {
   mainnet,
-  polygonMumbai,
+  sepolia,
 } from 'wagmi/chains'
 import {
   QueryClientProvider,
@@ -18,7 +18,7 @@ import {
 const config = getDefaultConfig({
   appName: 'ShadowPay',
   projectId: '75c7a01f8d8e13bd71c7dae66fa9b5c5', 
-  chains: [mainnet, polygonMumbai],
+  chains: [mainnet, sepolia],
   ssr: true, 
 })
 
