@@ -17,10 +17,16 @@ export default function SignInPage() {
 
   const handleRoleClick = (role: 'employer' | 'employee' | 'auditor') => {
     setSelectedRole(role)
+    
+    if (role === 'employee') {
+      router.push('/employee')
+      return
+    }
+    
+    // Employers and auditors need wallet connection
     if (!isConnected) {
       openConnectModal?.()
     } else {
-      // Navigate to appropriate dashboard
       router.push(`/${role === 'auditor' ? 'audit' : role}`)
     }
   }
@@ -71,6 +77,7 @@ export default function SignInPage() {
               </div>
             </Card>
 
+            {/* Employee Card */}
             <Card 
               className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-indigo-500/10 hover:from-blue-500/20 hover:via-cyan-500/10 hover:to-indigo-500/20 border border-blue-400/20 hover:border-blue-400/40 p-8 text-center shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-all duration-300 group cursor-pointer"
               onClick={() => handleRoleClick('employee')}
@@ -83,7 +90,7 @@ export default function SignInPage() {
                 <p className="text-gray-400 text-center">Access your private salary, scan for payments, and generate income proofs</p>
               </div>
               <div className="text-sm text-blue-400 font-medium">
-                {isConnected ? 'Enter Employee Portal →' : 'Click to Connect & Continue →'}
+                Enter Employee Portal →
               </div>
             </Card>
 
@@ -104,8 +111,6 @@ export default function SignInPage() {
               </div>
             </Card>
           </div>
-
-
         </section>
       </div>
     </div>
