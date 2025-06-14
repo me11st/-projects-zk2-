@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Shield, Eye, FileCheck, Users, Zap, Lock, CheckCircle, Upload, Play, Sparkles, Smartphone, Scan, FileText, Clipboard, EyeOff } from "lucide-react"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -18,7 +19,9 @@ export default function Home() {
             <a href="#problem" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">Problem</a>
             <a href="#solution" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">Solution</a>
             <a href="#about" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">About</a>
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-5 py-1.5 font-semibold text-sm">Open App</Button>
+            <Link href="/sign-in">
+              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-5 py-1.5 font-semibold text-sm">Open App</Button>
+            </Link>
           </div>
         </div>
       </nav>
@@ -38,10 +41,12 @@ export default function Home() {
         </h2>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="text-lg px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
-            <Zap className="mr-2 h-5 w-5" />
-            Open App
-          </Button>
+          <Link href="/sign-in">
+            <Button size="lg" className="text-lg px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
+              <Zap className="mr-2 h-5 w-5" />
+              Open App
+            </Button>
+          </Link>
           <Button size="lg" variant="outline" className="text-lg px-10 py-4 border-gray-600 text-gray-300 hover:bg-gray-900 hover:text-white transition-all duration-200">
             <FileCheck className="mr-2 h-5 w-5" />
             Learn More
