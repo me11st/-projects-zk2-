@@ -192,6 +192,10 @@ export default function EmployeePage() {
       console.log('🔑 First 3 words:', mnemonic.split(' ').slice(0, 3).join(' '))
       console.log('🔑 Last 3 words:', mnemonic.split(' ').slice(-3).join(' '))
       
+      // Store the active wallet info for the dashboard
+      localStorage.setItem('shadowpay-active-wallet-id', wallet.id)
+      localStorage.setItem('shadowpay-active-wallet-password', unlockPassword) // Store temporarily for balance fetching
+      
       // Mark wallet as setup and redirect to dashboard
       localStorage.setItem('shadowpay-wallet-setup', 'completed')
       router.push('/employee/dashboard')
@@ -247,9 +251,15 @@ export default function EmployeePage() {
   }
 
   const handleContinue = () => {
-    // Mark wallet setup as completed
+    // Mark wallet as setup and redirect to dashboard
     localStorage.setItem('shadowpay-wallet-setup', 'completed')
-    // Wallet setup complete, redirect to dashboard
+    
+    // Store the active wallet info for the dashboard
+    if (createdWallet) {
+      localStorage.setItem('shadowpay-active-wallet-id', createdWallet.id)
+      localStorage.setItem('shadowpay-active-wallet-password', password) // Store the password used during creation
+    }
+    
     router.push('/employee/dashboard')
   }
 

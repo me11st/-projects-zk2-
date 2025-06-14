@@ -1,3 +1,4 @@
+import { NETWORK_CONFIG } from '@railgun-community/shared-models'
 import CryptoJS from 'crypto-js'
 import { Mnemonic, randomBytes } from 'ethers'
 
@@ -5,7 +6,12 @@ import { Mnemonic, randomBytes } from 'ethers'
 let startRailgunEngine: any = null
 let createRailgunWallet: any = null
 let loadWalletByID: any = null
+let setOnBalanceUpdateCallback: any = null
+let setOnUTXOMerkletreeScanCallback: any = null
+let setOnTXIDMerkletreeScanCallback: any = null
+let refreshBalances: any = null
 let NetworkName: any = null
+let TXIDVersion: any = null
 
 // Dynamic import function for Railgun SDK
 async function loadRailgunSDK() {
@@ -18,7 +24,12 @@ async function loadRailgunSDK() {
     startRailgunEngine = walletModule.startRailgunEngine
     createRailgunWallet = walletModule.createRailgunWallet
     loadWalletByID = walletModule.loadWalletByID
+    setOnBalanceUpdateCallback = walletModule.setOnBalanceUpdateCallback
+    setOnUTXOMerkletreeScanCallback = walletModule.setOnUTXOMerkletreeScanCallback
+    setOnTXIDMerkletreeScanCallback = walletModule.setOnTXIDMerkletreeScanCallback
+    refreshBalances = walletModule.refreshBalances
     NetworkName = sharedModule.NetworkName
+    TXIDVersion = sharedModule.TXIDVersion
     
     return true
   } catch (error) {
@@ -171,6 +182,9 @@ export class RailgunWalletManager {
   private isInitialized = false
   private railgunEngineStarted = false
   private railgunSDKLoaded = false
+  private currentEncryptionKey: Uint8Array | null = null
+  private balanceCallbacks: Map<string, (balance: any) => void> = new Map()
+  private latestBalances: Map<string, any> = new Map()
 
   private constructor() {
     this.walletDB = new WalletDB()
@@ -221,68 +235,49 @@ export class RailgunWalletManager {
   }
 
   private async initializeRailgunEngine(): Promise<void> {
-    if (this.railgunEngineStarted || !this.railgunSDKLoaded) return
+    if (this.railgunEngineStarted) return
+    if (!this.railgunSDKLoaded) {
+      throw new Error('Railgun SDK not loaded')
+    }
 
-    console.log('🚀 Starting Railgun engine...')
-    
     try {
-      // Import LevelDB for browser
-      const LevelDB = (await import('level-js')).default
+      console.log('🚀 Initializing Railgun engine...')
       
-      // Create LevelDOWN compatible database for storing encrypted wallets
-      const dbPath = 'shadowpay-railgun-engine.db'
-      const db = new LevelDB(dbPath)
+      // Initialize LevelDB database
+      const LevelDOWN = await import('level-js')
+      const db = new LevelDOWN.default('shadowpay-railgun-db')
       
-      // Start Railgun engine with proper database configuration as per documentation
+      const shouldDebug = true
+      const artifactStore = {
+        // Artifact store implementation
+        getArtifact: async () => undefined,
+        storeArtifact: async () => {},
+        deleteArtifact: async () => {}
+      }
+      
+      // Start the Railgun engine
       await startRailgunEngine(
-        'ShadowPay', // walletSource - name for wallet implementation (max 16 chars, lowercase)
-        db, // LevelDOWN compatible database
-        false, // shouldDebug - disable debug to avoid potential issues
-        undefined, // artifactStore - we'll implement this later if needed
-        false, // useNativeArtifacts - false for browser
-        false, // skipMerkletreeScans - MUST be false for wallet functionality
-        [], // poiNodeURLs - empty array for now
-        [], // customPOILists - empty array
-        false, // verboseScanLogging
+        'ShadowPay',
+        db,
+        shouldDebug,
+        artifactStore,
+        true, // useNativeArtifacts - true for better performance
+        false, // skipMerkletreeScans - set to false to enable balance loading
+        false // skipMerkletreeScans - MUST be false for wallets to load balances
       )
       
-      this.railgunEngineStarted = true
-      console.log('✅ Railgun engine started successfully with LevelDB')
-    } catch (error) {
-      console.error('❌ Failed to start Railgun engine:', error)
-      console.error('📋 Engine error details:', {
-        message: error instanceof Error ? error.message : error,
-        stack: error instanceof Error ? error.stack : undefined
-      })
+      console.log('✅ Railgun engine started successfully')
       
-      // Try alternative configuration with different parameters
-      console.log('🔄 Trying alternative Railgun engine configuration...')
-      try {
-        // Import LevelDB for browser
-        const LevelDB = (await import('level-js')).default
-        
-        // Create LevelDOWN compatible database with different name
-        const dbPath = 'shadowpay-railgun-alt.db'
-        const db = new LevelDB(dbPath)
-        
-        await startRailgunEngine(
-          'shadowpay', // walletSource - lowercase
-          db, // LevelDOWN compatible database
-          false, // shouldDebug
-          undefined, // artifactStore
-          false, // useNativeArtifacts
-          false, // skipMerkletreeScans
-          [], // poiNodeURLs
-          [], // customPOILists
-          false, // verboseScanLogging
-        )
-        
-        this.railgunEngineStarted = true
-        console.log('✅ Railgun engine started with alternative configuration')
-      } catch (altError) {
-        console.error('❌ Alternative configuration also failed:', altError)
-        throw new Error('Failed to initialize Railgun engine with any configuration: ' + (altError instanceof Error ? altError.message : altError))
-      }
+      this.railgunEngineStarted = true
+      
+      // Set up balance callbacks as per Railgun documentation
+      this.setupBalanceCallbacks()
+      
+      console.log('🎉 Railgun engine initialization complete')
+      
+    } catch (error) {
+      console.error('❌ Failed to initialize Railgun engine:', error)
+      throw error
     }
   }
 
@@ -323,9 +318,18 @@ export class RailgunWalletManager {
 
       console.log('🚀 Creating Railgun wallet with mnemonic...')
       
-      // Generate a proper 32-byte encryption key for Railgun wallet
-      // We'll derive it from the password to ensure it's consistent for the same user
-      const encryptionKey = CryptoJS.SHA256(password + 'ShadowPay-Salt').toString().substring(0, 64) // 32 bytes as hex string
+      // Generate the same encryption key from password
+      const encryptionKey = new Uint8Array(
+        CryptoJS.SHA256(password + 'ShadowPay-Salt').words.map(word => [
+          (word >>> 24) & 0xff,
+          (word >>> 16) & 0xff,
+          (word >>> 8) & 0xff,
+          word & 0xff
+        ]).flat()
+      )
+      
+      // Store the encryption key for later use
+      this.currentEncryptionKey = encryptionKey
       
       const railgunWalletInfo = await createRailgunWallet(
         encryptionKey, // 32-byte encryption key (hex string)
@@ -394,12 +398,22 @@ export class RailgunWalletManager {
       if (this.railgunSDKLoaded && this.railgunEngineStarted && loadWalletByID) {
         try {
           // Generate the same encryption key used during wallet creation
-          const encryptionKey = CryptoJS.SHA256(password + 'ShadowPay-Salt').toString().substring(0, 64) // 32 bytes as hex string
+          const encryptionKey = new Uint8Array(
+            CryptoJS.SHA256(password + 'ShadowPay-Salt').words.map(word => [
+              (word >>> 24) & 0xff,
+              (word >>> 16) & 0xff,
+              (word >>> 8) & 0xff,
+              word & 0xff
+            ]).flat()
+          )
+          
+          // Store the encryption key for later use
+          this.currentEncryptionKey = encryptionKey
           
           await loadWalletByID(
             encryptionKey, // 32-byte encryption key (same as creation)
             wallet.railgunWalletID, // walletID
-            true, // isViewOnlyWallet
+            false, // isViewOnlyWallet
           )
           console.log('Loaded Railgun wallet:', wallet.address)
         } catch (railgunError) {
@@ -482,6 +496,232 @@ export class RailgunWalletManager {
   // Check if Railgun SDK is available
   isRailgunAvailable(): boolean {
     return this.railgunSDKLoaded && this.railgunEngineStarted
+  }
+
+  // Get Railgun USDC balance for a wallet using callbacks
+  async getRailgunUSDCBalance(walletId: string): Promise<{
+    balance: string
+    balanceWei: string
+    symbol: string
+    decimals: number
+  }> {
+    if (!this.isRailgunAvailable()) {
+      throw new Error('Railgun SDK not available')
+    }
+
+    if (!setOnBalanceUpdateCallback || !refreshBalances) {
+      throw new Error('Balance functions not loaded from Railgun SDK')
+    }
+
+    try {
+      console.log('🔍 Getting Railgun USDC balance for wallet:', walletId)
+      
+      // USDC contract address on Ethereum Sepolia testnet
+      const USDC_CONTRACT_ADDRESS = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
+      
+      // Use EthereumSepolia network
+      const networkName = NetworkName.EthereumSepolia
+      
+      console.log('🌐 Using network:', networkName)
+      
+      // Check if we already have cached balances
+      const cachedBalance = this.latestBalances.get(walletId)
+      if (cachedBalance) {
+        console.log('📋 Using cached balance data:', cachedBalance)
+        
+        // Find USDC in the ERC20 amounts
+        const usdcBalance = cachedBalance.erc20Amounts.find((token: any) => 
+          token.tokenAddress.toLowerCase() === USDC_CONTRACT_ADDRESS.toLowerCase()
+        )
+        
+        if (usdcBalance) {
+          const decimals = 6
+          const balanceWei = usdcBalance.amount
+          const balanceFormatted = (Number(balanceWei) / Math.pow(10, decimals)).toFixed(6)
+          
+          console.log(`💵 Cached USDC Balance: ${balanceFormatted} USDC (${balanceWei} wei)`)
+          
+          return {
+            balance: balanceFormatted,
+            balanceWei: balanceWei,
+            symbol: 'USDC',
+            decimals: decimals
+          }
+        }
+      }
+      
+      // If no cached balance, trigger a refresh and wait for callback
+      console.log('🔄 No cached balance found, refreshing...')
+      console.log('⏳ This may take up to 5 minutes for initial wallet sync...')
+      
+      return new Promise((resolve, reject) => {
+        let progressInterval: NodeJS.Timeout
+        let startTime = Date.now()
+        
+        // Set up a callback for this specific wallet
+        this.balanceCallbacks.set(walletId, (balancesEvent: any) => {
+          try {
+            const elapsedTime = Math.round((Date.now() - startTime) / 1000)
+            console.log(`💰 Received balance update for wallet: ${walletId} (after ${elapsedTime}s)`)
+            
+            // Clear progress interval
+            if (progressInterval) {
+              clearInterval(progressInterval)
+            }
+            
+            // Find USDC in the ERC20 amounts
+            const usdcBalance = balancesEvent.erc20Amounts.find((token: any) => 
+              token.tokenAddress.toLowerCase() === USDC_CONTRACT_ADDRESS.toLowerCase()
+            )
+            
+            if (usdcBalance) {
+              const decimals = 6
+              const balanceWei = usdcBalance.amount
+              const balanceFormatted = (Number(balanceWei) / Math.pow(10, decimals)).toFixed(6)
+              
+              console.log(`💵 Fresh USDC Balance: ${balanceFormatted} USDC (${balanceWei} wei)`)
+              
+              // Clean up callback
+              this.balanceCallbacks.delete(walletId)
+              
+              resolve({
+                balance: balanceFormatted,
+                balanceWei: balanceWei,
+                symbol: 'USDC',
+                decimals: decimals
+              })
+            } else {
+              console.log('💰 No USDC balance found, returning zero')
+              
+              // Clean up callback
+              this.balanceCallbacks.delete(walletId)
+              
+              resolve({
+                balance: '0.000000',
+                balanceWei: '0',
+                symbol: 'USDC',
+                decimals: 6
+              })
+            }
+          } catch (error) {
+            console.error('❌ Error processing balance callback:', error)
+            if (progressInterval) {
+              clearInterval(progressInterval)
+            }
+            this.balanceCallbacks.delete(walletId)
+            reject(error)
+          }
+        })
+        
+        // Show progress every 10 seconds
+        progressInterval = setInterval(() => {
+          const elapsedTime = Math.round((Date.now() - startTime) / 1000)
+          const remainingTime = Math.round((300000 - (Date.now() - startTime)) / 1000)
+          console.log(`⏳ Still waiting for balance update... (${elapsedTime}s elapsed, ${remainingTime}s remaining)`)
+        }, 10000)
+        
+        // Trigger balance refresh
+        refreshBalances(networkName, [walletId])
+          .then(() => {
+            console.log('✅ Balance refresh triggered successfully')
+            console.log('🔍 Waiting for merkletree scan to complete...')
+          })
+          .catch((error: any) => {
+            console.error('❌ Failed to trigger balance refresh:', error)
+            if (progressInterval) {
+              clearInterval(progressInterval)
+            }
+            this.balanceCallbacks.delete(walletId)
+            reject(error)
+          })
+        
+        // Set a timeout to avoid hanging forever
+        setTimeout(() => {
+          if (this.balanceCallbacks.has(walletId)) {
+            if (progressInterval) {
+              clearInterval(progressInterval)
+            }
+            this.balanceCallbacks.delete(walletId)
+            reject(new Error('Balance refresh timeout after 5 minutes'))
+          }
+        }, 300000) // 5 minutes = 300,000 milliseconds
+      })
+    } catch (error) {
+      console.error('❌ Failed to fetch Railgun USDC balance:', error)
+      throw new Error(`Failed to fetch USDC balance: ${error instanceof Error ? error.message : 'Unknown error'}`)
+    }
+  }
+
+  // Set up Railgun balance callbacks
+  private setupBalanceCallbacks(): void {
+    if (!setOnBalanceUpdateCallback || !setOnUTXOMerkletreeScanCallback || !setOnTXIDMerkletreeScanCallback) {
+      console.warn('⚠️ Balance callback functions not available')
+      return
+    }
+
+    console.log('🔄 Setting up Railgun balance callbacks...')
+
+    // Balance update callback - called when balances are updated
+    const onBalanceUpdateCallback = (balancesEvent: any) => {
+      console.log('💰 Balance update received:', balancesEvent)
+      
+      const { railgunWalletID, erc20Amounts, chain } = balancesEvent
+      
+      // Store the latest balances
+      this.latestBalances.set(railgunWalletID, {
+        erc20Amounts,
+        chain,
+        lastUpdated: new Date().toISOString()
+      })
+      
+      // Notify any waiting callbacks
+      const callback = this.balanceCallbacks.get(railgunWalletID)
+      if (callback) {
+        callback(balancesEvent)
+      }
+    }
+
+    // Merkletree scan callbacks for progress updates
+    const onUTXOMerkletreeScanCallback = (eventData: any) => {
+      console.log('🔍 UTXO Merkletree scan progress:', {
+        chain: eventData.chain?.type || 'Unknown',
+        scanStatus: eventData.scanStatus,
+        progress: eventData.progress,
+        total: eventData.total,
+        current: eventData.current,
+        percentage: eventData.total > 0 ? Math.round((eventData.current / eventData.total) * 100) : 0
+      })
+      
+      if (eventData.scanStatus === 'Complete') {
+        console.log('✅ UTXO Merkletree scan completed!')
+      } else if (eventData.scanStatus === 'Started') {
+        console.log('🚀 UTXO Merkletree scan started...')
+      }
+    }
+
+    const onTXIDMerkletreeScanCallback = (eventData: any) => {
+      console.log('🔍 TXID Merkletree scan progress:', {
+        chain: eventData.chain?.type || 'Unknown',
+        scanStatus: eventData.scanStatus,
+        progress: eventData.progress,
+        total: eventData.total,
+        current: eventData.current,
+        percentage: eventData.total > 0 ? Math.round((eventData.current / eventData.total) * 100) : 0
+      })
+      
+      if (eventData.scanStatus === 'Complete') {
+        console.log('✅ TXID Merkletree scan completed!')
+      } else if (eventData.scanStatus === 'Started') {
+        console.log('🚀 TXID Merkletree scan started...')
+      }
+    }
+
+    // Set the callbacks
+    setOnBalanceUpdateCallback(onBalanceUpdateCallback)
+    setOnUTXOMerkletreeScanCallback(onUTXOMerkletreeScanCallback)
+    setOnTXIDMerkletreeScanCallback(onTXIDMerkletreeScanCallback)
+
+    console.log('✅ Railgun balance callbacks set up successfully')
   }
 }
 

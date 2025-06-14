@@ -17,13 +17,15 @@ import {
   Search,
   MoreHorizontal,
   Wallet,
-  TrendingUp
+  TrendingUp,
+  DollarSign
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { EmployeeHeader } from '@/components/EmployeeHeader'
+import { walletManager } from '@/lib/wallet'
 
 // Mock employee data - in real app this would come from context/API
 const mockEmployeeData = {
@@ -81,6 +83,146 @@ const mockEmployeeData = {
   ]
 }
 
+// Railgun USDC Balance Component
+function RailgunUSDCBalance() {
+  const [balance, setBalance] = useState<{
+    balance: string
+    balanceWei: string
+    symbol: string
+    decimals: number
+  } | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchBalance = async () => {
+    setIsLoading(true)
+    setError(null)
+    
+    try {
+      console.log('🔍 Starting balance fetch...')
+      
+      // Get the active wallet ID from localStorage
+      const activeWalletId = localStorage.getItem('shadowpay-active-wallet-id')
+      const activeWalletPassword = localStorage.getItem('shadowpay-active-wallet-password')
+      
+      if (!activeWalletId) {
+        throw new Error('No active wallet found. Please unlock your wallet first.')
+      }
+      
+      if (!activeWalletPassword) {
+        throw new Error('Wallet password not available. Please unlock your wallet again.')
+      }
+      
+      console.log('🎯 Using active wallet ID:', activeWalletId)
+      
+      // Wait for Railgun SDK to be initialized
+      console.log('⏳ Waiting for Railgun SDK initialization...')
+      let attempts = 0
+      const maxAttempts = 30 // 30 seconds max wait
+      
+      while (!walletManager.isRailgunAvailable() && attempts < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 1000)) // Wait 1 second
+        attempts++
+        console.log(`⏳ Waiting for Railgun... (${attempts}/${maxAttempts})`)
+      }
+      
+      // Check if Railgun is available
+      const isRailgunAvailable = walletManager.isRailgunAvailable()
+      console.log('🚂 Railgun available:', isRailgunAvailable)
+      
+      if (!isRailgunAvailable) {
+        throw new Error('Railgun SDK failed to initialize after 30 seconds. Please refresh the page and try again.')
+      }
+      
+      // Ensure the wallet is unlocked (this will set the encryption key)
+      console.log('🔓 Ensuring wallet is unlocked...')
+      const { wallet } = await walletManager.loadWallet(activeWalletId, activeWalletPassword)
+      console.log('✅ Wallet unlocked successfully')
+      console.log('📝 Wallet details:', {
+        id: wallet.id,
+        name: wallet.name,
+        address: wallet.address,
+        railgunWalletID: wallet.railgunWalletID
+      })
+      
+      // Now fetch the balance using the railgunWalletID
+      console.log('💰 Fetching balance for Railgun wallet ID:', wallet.railgunWalletID)
+      const balanceData = await walletManager.getRailgunUSDCBalance(wallet.railgunWalletID)
+      setBalance(balanceData)
+      console.log('✅ Balance fetched successfully:', balanceData)
+    } catch (err) {
+      console.error('❌ Failed to fetch Railgun USDC balance:', err)
+      setError(err instanceof Error ? err.message : 'Failed to fetch balance')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchBalance()
+  }, [])
+
+  return (
+    <Card className="bg-gradient-to-br from-green-900/20 to-green-800/10 border-green-700/30 p-6">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+            <DollarSign className="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-white">Railgun USDC Balance</h3>
+            <p className="text-green-400 text-sm">Private Balance</p>
+          </div>
+        </div>
+        <Button
+          onClick={fetchBalance}
+          disabled={isLoading}
+          variant="outline"
+          size="sm"
+          className="border-green-600 text-green-400 hover:bg-green-800/20"
+        >
+          {isLoading ? (
+            <RefreshCw className="h-4 w-4 animate-spin" />
+          ) : (
+            <RefreshCw className="h-4 w-4" />
+          )}
+        </Button>
+      </div>
+      
+      {error ? (
+        <div className="text-red-400 text-sm">
+          <p>Error: {error}</p>
+          <p className="text-xs text-gray-500 mt-1">
+            Make sure your Railgun wallet is properly set up and synced.
+          </p>
+        </div>
+      ) : balance ? (
+        <div>
+          <div className="text-3xl font-bold text-white mb-2">
+            {balance.balance} {balance.symbol}
+          </div>
+          <div className="text-xs text-gray-400">
+            Wei: {balance.balanceWei}
+          </div>
+          <div className="flex items-center space-x-2 mt-3">
+            <Badge variant="outline" className="border-green-600 text-green-400">
+              <Shield className="h-3 w-3 mr-1" />
+              Private
+            </Badge>
+            <Badge variant="outline" className="border-blue-600 text-blue-400">
+              Sepolia
+            </Badge>
+          </div>
+        </div>
+      ) : (
+        <div className="text-gray-400">
+          {isLoading ? 'Loading balance...' : 'No balance data'}
+        </div>
+      )}
+    </Card>
+  )
+}
+
 export default function EmployeeDashboard() {
   const [showBalance, setShowBalance] = useState(true)
   const [isScanning, setIsScanning] = useState(false)
@@ -91,14 +233,23 @@ export default function EmployeeDashboard() {
   const [selectedFilter, setSelectedFilter] = useState('all')
   const router = useRouter()
 
-  // Check authentication status
+  // Check authentication status and initialize Railgun
   useEffect(() => {
-    const checkAuth = () => {
+    const checkAuth = async () => {
       const hasWallet = localStorage.getItem('shadowpay-wallet-setup') === 'completed'
       
       if (!hasWallet) {
         router.push('/sign-in')
         return
+      }
+      
+      // Initialize wallet manager (which will load Railgun SDK)
+      try {
+        console.log('🚀 Initializing wallet manager...')
+        await walletManager.initialize()
+        console.log('✅ Wallet manager initialized successfully')
+      } catch (error) {
+        console.error('❌ Failed to initialize wallet manager:', error)
       }
       
       setIsAuthenticated(true)
@@ -275,6 +426,9 @@ export default function EmployeeDashboard() {
                 </div>
               </div>
             </Card>
+
+            {/* Railgun USDC Balance */}
+            <RailgunUSDCBalance />
 
             {/* Action Buttons */}
             <div className="grid grid-cols-3 gap-4">
