@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Shield, Eye, FileCheck, Users, Zap, Lock, CheckCircle } from "lucide-react"
+import { Shield, Eye, FileCheck, Users, Zap, Lock, CheckCircle, Upload, Play, Sparkles, Smartphone, Scan, FileText, Clipboard, EyeOff } from "lucide-react"
 
 export default function Home() {
   return (
@@ -67,30 +67,30 @@ export default function Home() {
             <h3 className="text-2xl font-bold text-white">Everyone Can See Your Payroll</h3>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-12 text-center">
-            <div>
-              <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Users className="h-8 w-8 text-red-400" />
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            <Card className="backdrop-blur-xl bg-gradient-to-br from-red-500/10 via-rose-500/5 to-pink-500/10 hover:from-red-500/20 hover:via-rose-500/10 hover:to-pink-500/20 border border-red-400/20 hover:border-red-400/40 p-8 text-center shadow-2xl shadow-red-500/10 hover:shadow-red-500/20 transition-all duration-300">
+              <div className="w-20 h-20 bg-gradient-to-br from-red-400/20 to-rose-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                <Users className="h-10 w-10 text-red-400" />
               </div>
-              <h4 className="text-lg font-semibold text-white mb-3">Workplace Tension</h4>
-              <p className="text-gray-400 leading-relaxed">Colleagues discover salary differences, causing internal conflicts and damaging team dynamics</p>
-            </div>
+              <h3 className="text-xl font-bold text-white mb-3">Workplace Tension</h3>
+              <p className="text-gray-400 mb-6">Colleagues discover salary differences, causing internal conflicts and damaging team dynamics</p>
+            </Card>
             
-            <div>
-              <div className="w-16 h-16 bg-yellow-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Shield className="h-8 w-8 text-yellow-400" />
+            <Card className="backdrop-blur-xl bg-gradient-to-br from-yellow-500/10 via-amber-500/5 to-orange-500/10 hover:from-yellow-500/20 hover:via-amber-500/10 hover:to-orange-500/20 border border-yellow-400/20 hover:border-yellow-400/40 p-8 text-center shadow-2xl shadow-yellow-500/10 hover:shadow-yellow-500/20 transition-all duration-300">
+              <div className="w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-amber-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                <Shield className="h-10 w-10 text-yellow-400" />
               </div>
-              <h4 className="text-lg font-semibold text-white mb-3">Legal Compliance</h4>
-              <p className="text-gray-400 leading-relaxed">GDPR and privacy regulations require strict salary confidentiality protection</p>
-            </div>
+              <h3 className="text-xl font-bold text-white mb-3">Legal Compliance</h3>
+              <p className="text-gray-400 mb-6">GDPR and privacy regulations require strict salary confidentiality protection</p>
+            </Card>
             
-            <div>
-              <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Eye className="h-8 w-8 text-blue-400" />
+            <Card className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-indigo-500/10 hover:from-blue-500/20 hover:via-cyan-500/10 hover:to-indigo-500/20 border border-blue-400/20 hover:border-blue-400/40 p-8 text-center shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-all duration-300">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                <Eye className="h-10 w-10 text-blue-400" />
               </div>
-              <h4 className="text-lg font-semibold text-white mb-3">Competitive Intelligence</h4>
-              <p className="text-gray-400 leading-relaxed">Competitors analyze your compensation strategy and talent acquisition costs</p>
-            </div>
+              <h3 className="text-xl font-bold text-white mb-3">Competitive Intelligence</h3>
+              <p className="text-gray-400 mb-6">Competitors analyze your compensation strategy and talent acquisition costs</p>
+            </Card>
           </div>
         </div>
       </section>
@@ -107,147 +107,129 @@ export default function Home() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border-blue-200 dark:border-blue-800">
-            <CardHeader>
-              <CardTitle className="flex items-center text-blue-800 dark:text-blue-200">
-                <Lock className="mr-2 h-6 w-6" />
-                Bundle & Encrypt
-              </CardTitle>
-              <CardDescription>
-                Combine entire payroll into one private transaction
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
-                Secure hardware enclaves process payments privately, sending to one-time addresses only employees can access.
-              </p>
-            </CardContent>
+          <Card className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 via-indigo-500/5 to-cyan-500/10 hover:from-blue-500/20 hover:via-indigo-500/10 hover:to-cyan-500/20 border border-blue-400/20 hover:border-blue-400/40 p-8 text-center shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-all duration-300">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <Lock className="h-10 w-10 text-blue-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Bundle & Encrypt</h3>
+            <p className="text-gray-400 mb-6">Combine entire payroll into one private transaction</p>
+            <p className="text-gray-400 text-sm">
+              Secure hardware enclaves process payments privately, sending to one-time addresses only employees can access.
+            </p>
           </Card>
 
-          <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-200 dark:border-green-800">
-            <CardHeader>
-              <CardTitle className="flex items-center text-green-800 dark:text-green-200">
-                <Shield className="mr-2 h-6 w-6" />
-                Prove Compliance
-              </CardTitle>
-              <CardDescription>
-                Mathematical proofs without revealing details
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
-                Zero-knowledge proofs verify total amounts and legal compliance while keeping individual salaries private.
-              </p>
-            </CardContent>
+          <Card className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-teal-500/10 hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/20 border border-green-400/20 hover:border-green-400/40 p-8 text-center shadow-2xl shadow-green-500/10 hover:shadow-green-500/20 transition-all duration-300">
+            <div className="w-20 h-20 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <Shield className="h-10 w-10 text-green-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Prove Compliance</h3>
+            <p className="text-gray-400 mb-6">Mathematical proofs without revealing details</p>
+            <p className="text-gray-400 text-sm">
+              Zero-knowledge proofs verify total amounts and legal compliance while keeping individual salaries private.
+            </p>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border-purple-200 dark:border-purple-800">
-            <CardHeader>
-              <CardTitle className="flex items-center text-purple-800 dark:text-purple-200">
-                <Users className="mr-2 h-6 w-6" />
-                Simple Experience
-              </CardTitle>
-              <CardDescription>
-                Easy for HR, employees, and auditors
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
-                Upload CSV, scan for payments, verify proofs - all with intuitive interfaces that hide complexity.
-              </p>
-            </CardContent>
+          <Card className="backdrop-blur-xl bg-gradient-to-br from-purple-500/10 via-violet-500/5 to-fuchsia-500/10 hover:from-purple-500/20 hover:via-violet-500/10 hover:to-fuchsia-500/20 border border-purple-400/20 hover:border-purple-400/40 p-8 text-center shadow-2xl shadow-purple-500/10 hover:shadow-purple-500/20 transition-all duration-300">
+            <div className="w-20 h-20 bg-gradient-to-br from-purple-400/20 to-violet-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <Users className="h-10 w-10 text-purple-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Simple Experience</h3>
+            <p className="text-gray-400 mb-6">Easy for HR, employees, and auditors</p>
+            <p className="text-gray-400 text-sm">
+              Upload CSV, scan for payments, verify proofs - all with intuitive interfaces that hide complexity.
+            </p>
           </Card>
         </div>
       </section>
 
       {/* User Types Section */}
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-6 py-20">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-6">
+          <h2 className="text-4xl font-bold text-white mb-6">
             Three Portals, One Solution
           </h2>
-          <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Role-specific interfaces that make privacy-preserving payroll effortless
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <div className="text-4xl mb-4">👩‍💼</div>
-              <CardTitle>HR Staff</CardTitle>
-              <CardDescription>Drag, drop, done</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-sm">Upload salary spreadsheet</span>
+        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <Card className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-teal-500/10 hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/20 border border-green-400/20 hover:border-green-400/40 p-8 text-center shadow-2xl shadow-green-500/10 hover:shadow-green-500/20 transition-all duration-300">
+            <div className="w-20 h-20 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <Users className="h-10 w-10 text-green-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">HR Staff</h3>
+            <p className="text-gray-400 mb-6">Drag, drop, done</p>
+            <div className="space-y-3 text-left">
+              <div className="flex items-center text-gray-300 text-sm">
+                <Upload className="h-4 w-4 text-blue-400 mr-3 flex-shrink-0" />
+                Upload salary spreadsheet
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-sm">Click "Run Payroll"</span>
+              <div className="flex items-center text-gray-300 text-sm">
+                <Play className="h-4 w-4 text-green-400 mr-3 flex-shrink-0" />
+                Click "Run Payroll"
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-sm">Get secure vault confirmation</span>
+              <div className="flex items-center text-gray-300 text-sm">
+                <Shield className="h-4 w-4 text-purple-400 mr-3 flex-shrink-0" />
+                Get secure vault confirmation
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-sm">Celebrate with confetti! 🎉</span>
+              <div className="flex items-center text-gray-300 text-sm">
+                <Sparkles className="h-4 w-4 text-yellow-400 mr-3 flex-shrink-0" />
+                Celebrate with confetti! 🎉
               </div>
-            </CardContent>
+            </div>
           </Card>
 
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <div className="text-4xl mb-4">👨‍💻</div>
-              <CardTitle>Employees</CardTitle>
-              <CardDescription>Scan, view, withdraw</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-sm">Open mobile-friendly wallet</span>
+          <Card className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-indigo-500/10 hover:from-blue-500/20 hover:via-cyan-500/10 hover:to-indigo-500/20 border border-blue-400/20 hover:border-blue-400/40 p-8 text-center shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-all duration-300">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <Zap className="h-10 w-10 text-blue-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Employees</h3>
+            <p className="text-gray-400 mb-6">Scan, view, withdraw</p>
+            <div className="space-y-3 text-left">
+              <div className="flex items-center text-gray-300 text-sm">
+                <Smartphone className="h-4 w-4 text-blue-400 mr-3 flex-shrink-0" />
+                Open mobile-friendly wallet
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-sm">Tap "Scan for salary"</span>
+              <div className="flex items-center text-gray-300 text-sm">
+                <Scan className="h-4 w-4 text-green-400 mr-3 flex-shrink-0" />
+                Tap "Scan for salary"
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-sm">See private payment amount</span>
+              <div className="flex items-center text-gray-300 text-sm">
+                <Eye className="h-4 w-4 text-purple-400 mr-3 flex-shrink-0" />
+                See private payment amount
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-sm">Generate income proofs</span>
+              <div className="flex items-center text-gray-300 text-sm">
+                <FileText className="h-4 w-4 text-yellow-400 mr-3 flex-shrink-0" />
+                Generate income proofs
               </div>
-            </CardContent>
+            </div>
           </Card>
 
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <div className="text-4xl mb-4">🔍</div>
-              <CardTitle>Auditors</CardTitle>
-              <CardDescription>Paste, verify, confirm</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-sm">Paste proof code</span>
+          <Card className="backdrop-blur-xl bg-gradient-to-br from-purple-500/10 via-violet-500/5 to-fuchsia-500/10 hover:from-purple-500/20 hover:via-violet-500/10 hover:to-fuchsia-500/20 border border-purple-400/20 hover:border-purple-400/40 p-8 text-center shadow-2xl shadow-purple-500/10 hover:shadow-purple-500/20 transition-all duration-300">
+            <div className="w-20 h-20 bg-gradient-to-br from-purple-400/20 to-violet-400/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <FileCheck className="h-10 w-10 text-purple-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Auditors</h3>
+            <p className="text-gray-400 mb-6">Paste, verify, confirm</p>
+            <div className="space-y-3 text-left">
+              <div className="flex items-center text-gray-300 text-sm">
+                <Clipboard className="h-4 w-4 text-blue-400 mr-3 flex-shrink-0" />
+                Paste proof code
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-sm">Instant verification</span>
+              <div className="flex items-center text-gray-300 text-sm">
+                <Zap className="h-4 w-4 text-green-400 mr-3 flex-shrink-0" />
+                Instant verification
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-sm">See compliance confirmation</span>
+              <div className="flex items-center text-gray-300 text-sm">
+                <CheckCircle className="h-4 w-4 text-purple-400 mr-3 flex-shrink-0" />
+                See compliance confirmation
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-sm">No individual salary exposure</span>
+              <div className="flex items-center text-gray-300 text-sm">
+                <EyeOff className="h-4 w-4 text-yellow-400 mr-3 flex-shrink-0" />
+                No individual salary exposure
               </div>
-            </CardContent>
+            </div>
           </Card>
         </div>
       </section>
