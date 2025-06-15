@@ -11,8 +11,12 @@ Identity-Locked Social Recovery accessible to everyone!
 ________________________________________
 
 📝 Description (TL;DR)
+
 Social recovery is finally accessible to everyone!
-Identity locked social recovery that is accessible for non-technical users with non-technical friends/family— no passwords, no on-chain footprint, no crypto-native guardians needed. Instead, your face + friends/family enable private, off-chain seedphrase recovery.
+
+Identity locked social recovery that is accessible for non-technical users with non-technical friends/family— no passwords, no on-chain footprint, 
+no crypto-native guardians needed.
+ Instead, your face + friends/family enable private, off-chain seedphrase recovery.
 ________________________________________
 
 🚨 Problem
