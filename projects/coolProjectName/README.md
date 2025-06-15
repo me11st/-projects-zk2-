@@ -3,7 +3,7 @@
 - **Track:** Public Goods | Applied Encryption
 - **Team/Contributors:** Danish | nodestarQ
 - **Repository:** [PLottoPGF repository](https://github.com/nodestarQ/hackathon-2025-berlin-submissions)
-- **Demo:** [Link to live demo, video, or screenshots]
+- **Demo:** [Presentation TO BE ADDED]
 
 ## Description (TL;DR)
 PLottoPGF ( **P**rivate **L**otto for **P**ublic **G**oods **F**unding) is a privacy-preserving number lottery (Lotto) to fund publics goods. Inspired by [lottopgf](https://lottopgf.org/), it lets participants play without revealing personal details—no one knows who’s playing, who wins, or when the money’s withdrawn. And the best part? Some of the ticket fees go towards funding public goods! (yay!!!)
