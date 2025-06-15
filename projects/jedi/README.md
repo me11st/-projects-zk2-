@@ -45,7 +45,7 @@ Building an AI co-founder platform with privacy-preserving computation at its co
 
 ## Solution
 
-# Privacy-Preserving AI Co-founder Platform
+### An AI co founder that takes care of your businness/marketing/legal needs.
 
 ## Core Innovation
 
