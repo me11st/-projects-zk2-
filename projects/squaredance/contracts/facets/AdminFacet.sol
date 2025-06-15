@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import { LibDiamond } from "../libraries/LibDiamond.sol";
+
 contract AdminFacet {
     struct Organization {
         string name;
