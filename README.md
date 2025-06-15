@@ -14,7 +14,7 @@
   - [Mixnet](https://github.com/hoprnet/hoprnet)
   - [Figma file](https://www.figma.com/design/k7EuEj4gBcojWkuez55FI3/Hopline?node-id=9-41&t=53m0hgs6fhaxaxKf-1)
 - **Demo:**
-  - [Video]()
+  - [Video](https://drive.google.com/file/d/1-kIzaZIKjC5XRUXZL66TPbU7m-IPGygD/view?usp=sharing)
   - [Presentation](https://www.figma.com/slides/rfNRzGdbk2ScoSATIMuQ5J/Hopline?node-id=1-114&t=tHDDcplIcPmsXy3N-1)
   - [Figma prototype](https://www.figma.com/proto/k7EuEj4gBcojWkuez55FI3/Hopline?page-id=9%3A41&node-id=73-690&p=f&viewport=-387%2C279%2C0.39&t=6QfTzSARG7o0GAS5-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=69%3A413)
 
