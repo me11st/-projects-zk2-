@@ -3,7 +3,7 @@
 - **Track(s):** Privacy Enhancement, Data Sovereignty
 - **Team/Contributors:** Daniel Silberschmidt, ChatGPT (technical co-pilot)
 - **Repository:** [https://github.com/dsilberschmidt/privacy-pal-dev]
-- **Demo:** [Demo video link or screenshots pending]
+- **Demo:** PrivacyPal_Slides.pdf
 
 ## Description (TL;DR)
 PrivacyPal is a local-first browser extension that watches the privacy policies you visit — and remembers them for you. It detects changes over time, notifies you when something shifts, and even suggests responses or alternatives using local AI models.
