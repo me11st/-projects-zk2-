@@ -11,9 +11,9 @@ export default function EmployeePage() {
     router.replace('/employee/dashboard')
   }, [router])
 
-  return (
-    <div className="dark min-h-screen bg-black flex items-center justify-center">
-      <div className="text-center">
+    return (
+      <div className="dark min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
         <p className="text-gray-400">Redirecting to your dashboard...</p>
       </div>
     </div>

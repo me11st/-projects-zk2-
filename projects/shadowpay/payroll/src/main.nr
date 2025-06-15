@@ -1,11 +1,12 @@
-fn main(x: Field, y: pub Field) {
-    assert(x != y);
-}
+fn main(amounts: [Field; 4], min_total_salary: Field) {
+    let mut total_salary = 0;
 
-#[test]
-fn test_main() {
-    main(1, 2);
+    for i in 0..4 {
+        assert(amounts[i] != 0, "Amount must not be zero");
+        total_salary += amounts[i];
+    }
 
-    // Uncomment to make test fail
-    // main(1, 1);
+    let total_salary_int: i32 = total_salary as i32;
+    let min_total_salary_int: i32 = min_total_salary as i32;
+    assert(total_salary_int >= min_total_salary_int);
 }

@@ -1,7 +1,7 @@
- 'use client'
+'use client'
 
 import { useState, useCallback } from 'react'
-import { useAccount } from 'wagmi'
+import { useAccount, useWriteContract } from 'wagmi'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { Shield, Upload, Download, ArrowLeft, ArrowRight, Check, Calculator, Users, DollarSign } from "lucide-react"
@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import { parseUnits } from 'viem'
 
 interface PayoutData {
   employeeId: string
@@ -26,6 +27,36 @@ E-1027,0x1234abCD5678ef90123456ABcdef7890ABcD.meta,4500.00,May-2025 salary
 E-2049,0x98Fa3210bCdE4567aBcDEf0987654321abcd.meta,3800.50,May-2025 salary
 E-3051,0x5678EfGh9012IjKl3456MnOp7890QrSt1234.meta,5200.75,May-2025 salary`
 
+const USDC_CONTRACT_ADDRESS = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
+// FIXME: Replace with your deployed payroll contract address
+const PAYROLL_CONTRACT_ADDRESS = '0xb0F3d814b4837Fe618C7441BD9a7B628fB0557Fd' 
+
+const USDC_ABI = [
+  {
+    "inputs": [
+      { "internalType": "address", "name": "spender", "type": "address" },
+      { "internalType": "uint256", "name": "value", "type": "uint256" }
+    ],
+    "name": "approve",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+] as const
+
+const PAYROLL_ABI = [
+    {
+    "inputs": [
+      { "internalType": "uint256", "name": "jobId", "type": "uint256" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "deposit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+] as const
+
 export default function EmployerWizardPage() {
   const { isConnected } = useAccount()
   const router = useRouter()
@@ -33,6 +64,7 @@ export default function EmployerWizardPage() {
   const [payoutData, setPayoutData] = useState<PayoutData[]>([])
   const [csvFile, setCsvFile] = useState<File | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
+  const { writeContractAsync } = useWriteContract()
 
   useEffect(() => {
     if (!isConnected) {
@@ -85,11 +117,46 @@ export default function EmployerWizardPage() {
   }
 
   const handleConfirmTransaction = async () => {
+
     setIsProcessing(true)
-    await new Promise(resolve => setTimeout(resolve, 3000))
-    setIsProcessing(false)
-    alert('Payroll transaction initiated successfully!')
-    router.push('/employer')
+    try {
+      const jobId = BigInt(Date.now())
+      const { totalWithFees } = calculateTotals()
+      // USDC on Sepolia has 6 decimals
+      const amountInBaseUnits = parseUnits(totalWithFees.toFixed(2), 6)
+
+      // 1. Approve USDC transfer to our payroll contract
+      console.log(`Approving ${totalWithFees} USDC for spender: ${PAYROLL_CONTRACT_ADDRESS}`)
+      const approveHash = await writeContractAsync({
+        address: USDC_CONTRACT_ADDRESS,
+        abi: USDC_ABI,
+        functionName: 'approve',
+        args: [PAYROLL_CONTRACT_ADDRESS, amountInBaseUnits],
+      })
+      console.log('Approval transaction hash:', approveHash)
+      
+      // NOTE: In a production app, you should wait for the transaction receipt here
+      // to ensure the approval was successful before proceeding.
+
+      // 2. Call deposit function on the payroll contract
+      console.log(`Depositing for job ID ${jobId} with amount ${totalWithFees} USDC`)
+      const depositHash = await writeContractAsync({
+        address: PAYROLL_CONTRACT_ADDRESS,
+        abi: PAYROLL_ABI,
+        functionName: 'deposit',
+        args: [jobId, amountInBaseUnits],
+      })
+      console.log('Deposit transaction hash:', depositHash)
+
+      alert('Payroll transaction initiated successfully! Check your wallet and the console for transaction details.')
+      router.push('/employer')
+
+    } catch (error) {
+      console.error('Transaction failed:', error)
+      alert(`Transaction failed. Check the console for details.`)
+    } finally {
+      setIsProcessing(false)
+    }
   }
 
   if (!isConnected) {

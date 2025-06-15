@@ -37,13 +37,13 @@ function EmployeeDashboardClient({ isConnected, onWithdraw }: { isConnected: boo
   }
 
   if (!isConnected) {
-    return (
+  return (
         <div className="text-center mt-20">
             <Wallet className="h-16 w-16 text-blue-400 mx-auto mb-6" />
             <h2 className="text-2xl font-bold text-white mb-2">Connect Your Wallet</h2>
             <p className="text-gray-400">
                 Please connect your Aztec wallet using the button in the header to view your dashboard.
-            </p>
+          </p>
         </div>
     )
   }
@@ -55,7 +55,7 @@ function EmployeeDashboardClient({ isConnected, onWithdraw }: { isConnected: boo
                 <div className="flex items-center space-x-3 mb-4">
                     <Shield className="h-6 w-6" />
                     <h3 className="text-lg font-semibold">Private Balance</h3>
-                </div>
+          </div>
                 <p className="text-4xl font-bold mb-1">{balance} <span className="text-2xl text-blue-200">sUSDC</span></p>
                 <p className="text-blue-200">Your shielded USDC ready for withdrawal.</p>
             </Card>
@@ -63,7 +63,7 @@ function EmployeeDashboardClient({ isConnected, onWithdraw }: { isConnected: boo
                  <div className="flex items-center space-x-3 mb-4">
                     <ArrowUpRight className="h-6 w-6 text-green-400" />
                     <h3 className="text-lg font-semibold text-white">Withdraw to Sepolia</h3>
-                </div>
+          </div>
                 <div className="space-y-4">
                      <Input 
                         placeholder="Amount (e.g., 100)"
@@ -81,10 +81,10 @@ function EmployeeDashboardClient({ isConnected, onWithdraw }: { isConnected: boo
                         {isWithdrawing && <RefreshCw className="h-4 w-4 mr-2 animate-spin" />}
                         Burn Tokens & Withdraw
                     </Button>
-                </div>
+          </div>
             </Card>
         </div>
-    </div>
+        </div>
   )
 }
 
@@ -94,7 +94,7 @@ export default function EmployeeDashboard() {
     const [address, setAddress] = useState<string | null>(null);
     const [isConnecting, setIsConnecting] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
         if (sdkAccount) {
             setIsConnected(true);
             setAddress(sdkAccount.address.toString() ?? null);
@@ -133,10 +133,10 @@ export default function EmployeeDashboard() {
         console.log(`Withdrawing ${amount} tokens to ${to} for account ${address}`);
         await new Promise(resolve => setTimeout(resolve, 2000));
         return Math.random() > 0.2;
-    }
+  }
 
-    return (
-        <div className="dark min-h-screen bg-black">
+  return (
+    <div className="dark min-h-screen bg-black">
             <EmployeeHeader 
                 isConnected={isConnected}
                 isConnecting={isConnecting}
@@ -150,7 +150,7 @@ export default function EmployeeDashboard() {
                     isConnected={isConnected}
                     onWithdraw={handleWithdraw}
                 />
-            </div>
-        </div>
-    )
+      </div>
+    </div>
+  )
 } 
