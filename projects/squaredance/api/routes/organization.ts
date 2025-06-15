@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import * as fs from 'fs';
 import path from 'path';
 import * as dotenv from 'dotenv';
+import {getDiamondAddress} from "../utils/diamond";
 dotenv.config();
 
 const router = express.Router();
@@ -21,7 +22,7 @@ router.post('/', async (req, res) => {
         await diamond.waitForDeployment();
 
         // const diamondAddress = await diamond.getAddress();
-        const diamondAddress = "0x67d269191c92Caf3cD7723F116c85e6E9bf55933"
+        const diamondAddress = getDiamondAddress()
         console.log(`Diamond deployed at: ${diamondAddress}`);
 
         // Get clean ABI only with the desired functions

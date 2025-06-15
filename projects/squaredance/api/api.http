@@ -16,7 +16,7 @@ POST http://localhost:3000/contributor
 Content-Type: application/json
 
 {
-  "contributorAddress": "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+  "contributorAddress": "0x0E801D84Fa97b50751Dbf25036d067dCf18858bF",
   "encryptedCID": "bafybeihdwdcexamplecid"
 }
 
@@ -32,5 +32,5 @@ Content-Type: application/json
 }
 
 ### Get shares for address
-GET http://localhost:3000/shares/0xabcdefabcdefabcdefabcdefabcdefabcdefabcd
+GET http://localhost:3000/shares/0x0E801D84Fa97b50751Dbf25036d067dCf18858bF
 ```
