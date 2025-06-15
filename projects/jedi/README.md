@@ -8,7 +8,7 @@
 
 ## Description (TL;DR)
 
-Building an AI co-founder platform with privacy-preserving computation at its core. Seven specialized AI agents work together using Nillion SecretLLM to process all business intelligence in an encrypted state, ensuring that sensitive startup data never exists in plaintext during computation. Developers get a full business co-founder without compromising on data privacy or competitive intelligence.
+Building an AI co founder that takes care of your businness/marketing/legal needs with privacy-preserving computation at its core. Seven specialized AI agents work together using Nillion SecretLLM to process all business intelligence in an encrypted state, ensuring that sensitive startup data never exists in plaintext during computation. Developers get a full business co-founder without compromising on data privacy or competitive intelligence.
 
 ## Problem
 
