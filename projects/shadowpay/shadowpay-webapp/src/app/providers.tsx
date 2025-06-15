@@ -15,7 +15,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query'
 
-const config = getDefaultConfig({
+export const config = getDefaultConfig({
   appName: 'ShadowPay',
   projectId: '75c7a01f8d8e13bd71c7dae66fa9b5c5', 
   chains: [mainnet, sepolia],
