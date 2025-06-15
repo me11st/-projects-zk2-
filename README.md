@@ -31,6 +31,7 @@ A progressive disclosure UX that gradually introduces HOPR's complexity as users
 - Progressive Onboarding: Layered interface revealing complexity gradually
 - Local Intelligence: On-device traffic analysis for routing optimization
 - Adaptive UX: Interface complexity scales with user engagement and expertise
+- Desktop UI: Electron and React
 
 ## Privacy Impact
 Combines HOPR's metadata privacy with traditional VPN traffic encryption. Multi-hop routing through HOPR's decentralized node network eliminates single points of failure. Local-only intelligence ensures no behavioral data leaves user's device while optimizing HOPR route selection.
