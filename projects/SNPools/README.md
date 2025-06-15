@@ -6,7 +6,7 @@
   - Bear Mo - Smart Contracts, fullstack
   - Kevo - front-end, vibe
 - **Repository:** https://github.com/orgs/w3p-hackathon/repositories
-- **Demo:** https://www.loom.com/share/3afbefdd32ae4e7aad1050fc8ddfa828?sid=2727cc6f-82b1-4aeb-9106-924231cd1a06
+- **Demo:** https://www.loom.com/share/3afbefdd32ae4e7aad1050fc8ddfa828?sid=2727cc6f-82b1-4aeb-9106-924231cd1a06 , Screenshots: https://github.com/w3p-hackathon/front-end/tree/main/screenshots
 
 ## Description (TL;DR)
 
