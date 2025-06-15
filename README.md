@@ -21,7 +21,7 @@
 
 ![Image](https://github.com/1uizeth/Hopline/blob/d3d2421addf98891650f9453d5424ac11772c11c/hopline.png)
 
-## Description (TL;DR)
+## TL;DR
 Hopline is a user-friendly interface for GnosisVPN, built on HOPR’s decentralized mixnet. While the core VPN binaries already existed, they were previously accessible only via CLI. With Hopline, we’re making enterprise-grade privacy accessible to everyday users by introducing a clean UI, intelligent onboarding, and progressive disclosure—transforming the experience from technical to intuitive.
 
 ## Problem
