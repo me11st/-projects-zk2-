@@ -20,16 +20,27 @@ no crypto-native guardians needed.
 ________________________________________
 
 🚨 Problem
-NO technical friends / family members no Social recovery!
+
+NO technical friends / family members which can act as Guradians ->>>  NO Social recovery!
+
 Or a bit more in detail:
+
 Digital Seed phrase based social recovery which is also identity locked(only the original owner can recover) is  NOT  accessible to people with non technical friends/family members.
+
 Even more detail:
+
 •	Most available applications for social recovery assume that technically proficient guardians are available to everyone.(which NEED to co-sign, download and set up an application, etc…)
+
 •	 For most social recovery setups Guardians could plot against you if they want to. Or if they are hacked your assets are gone.
+
 •	For most identity locked solutions the owner does need to store a password, a file or something.
+
 •	On-chain recovery options can compromise privacy, be less censorship resistance and leave traces.
+
 •	Hello L**ger  -No the solution is not to export the private keys to some companies… 
+
 •	Most of the the current available solutions are mostly EVM based, and not Seedphrase based! Therefor in case you hold mix of coins, they are not all part of the social recovery.
+
 •	Most of the solution out there, the Guardians need to know they are guardians and also for what they are the guardians. 
 
 ________________________________________
