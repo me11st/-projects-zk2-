@@ -29,12 +29,7 @@ What's next?
 ### 🎤 Project Presentations
 **After the submission deadline**, all teams must be prepared to present their submitted projects to judges.
 
-- Format: Demo presentation preferred over slides
-- Time allocation: 7 minutes total
-  -	4 minutes for demo/slides
-  -	3 minutes for questions
- 
-Watch the official Signal group for announcements and further information about the presentation process after the submissions close.
+More information: [📊 Judging Process](https://github.com/web3privacy/hackathon-2025-berlin/blob/main/README.md#-submissions--judging-process) @ Hacker Manual
 
 ### ⚖️ Judging
 All submissions will be evaluated by expert judges according to the [Judging Criteria](https://github.com/web3privacy/hackathon-2025-berlin/blob/main/README.md#%EF%B8%8F-judging-criteria) after the deadline and the project presentations.
@@ -50,7 +45,7 @@ Your project folder can include:
 
 ## 🛠️ Tracks
 
-Choose one track for your submission ([see detailed descriptions](https://github.com/web3privacy/hackathon-2025-berlin/blob/main/README.md#%EF%B8%8F-hackathon-tracks)):
+Choose one/two track(s) for your submission ([see detailed descriptions](https://github.com/web3privacy/hackathon-2025-berlin/blob/main/README.md#%EF%B8%8F-hackathon-tracks)):
 
 1. **Advanced Cryptography** - MPC, TEE, ZK, DID, FHE
 2. **Censorship Resistance** - Tor, mixnets, Nostr, mesh networks
@@ -67,7 +62,7 @@ Copy this template to your project's `README.md`:
 ```markdown
 # [Project Name]
 
-- **Track:** [Choose one from above]
+- **Track(s):** [Choose one or two from above]
 - **Team/Contributors:** [All who contributed - diverse skills welcomed]
 - **Repository:** [Link to your code repository]
 - **Demo:** [Link to live demo, video, or screenshots]
@@ -124,7 +119,7 @@ Copy this template to your project's `README.md`:
 
 ### ✅ Content Requirements
 - **Original work:** Created during the hackathon (June 13-15)
-- **One track only:** Choose exactly one track for judging
+- **Track selection:** Choose one or two tracks for judging
 - **Complete template:** All sections must be filled
 - **Working links:** Repository and demo links must be accessible
 - **Privacy focus:** Must address privacy improvements
