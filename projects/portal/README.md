@@ -3,28 +3,74 @@
 - Track(s): Public Goods, Censorship Resistance
 - Team/Contributors: sunsakis, belakm, yellowBirdy, weboko
 - Repository: https://github.com/sunsakis/portal
-- Demo: [Link to live demo, video, or screenshots]
+- Demo: https://github.com/sunsakis/portal - https://portal.live coming soon, static files ready but not deployed yet due to some errors so for now please run locally from our GitHub
 
 ## Description (TL;DR)
-[Brief description of your project]
+A decentralized location-based chat app where users can chat with people nearby via P2P messaging without storing personal data or tracking movement.
 
 ## Problem
-[What problem does this solve?]
+Location-based apps typically track users continuously and harvest personal data
+Social discovery requires sacrificing privacy to centralized platforms
+No way to connect with people in your immediate vicinity without exposing identity
 
 ## Solution
-[How does your project address the problem?]
+A user shares their GPS coordinates once to open a chat portal that allows people to participate in a P2P group chat.
 
 ## Technology Stack
-[List technologies, frameworks, libraries used]
+
+#Frontend:
+
+React 18 + Vite
+Leaflet + MapTiler (OpenStreetMap tiles)
+
+#P2P Infra:
+
+Waku (P2P messaging)
+Ethereum cryptography (eth-crypto, viem)
+Protobuf (message serialization)
+
+#Backend:
+Supabase (anonymous portal location storage)
+
+#Privacy Tech:
+
+Client-side identity generation
+End-to-end encryption for friend requests
+No user tracking or analytics
+Local-first data storage
 
 ## Privacy Impact
 [How does this improve privacy?]
 
 ## Real-World Use Cases
-[Who would use this and how?]
+#Social Discovery:
+
+Conference networking without sharing personal contacts
+Meeting people at concerts, festivals, or events
+Campus connections for students
+Neighborhood community building
+
+#Privacy-Conscious Communication:
+
+Activists coordinating in sensitive locations
+Travelers connecting without exposing identity
+Local community organizing
+Emergency coordination in disaster areas
+
+#Professional Networking:
+
+Co-working space connections
+Industry meetup coordination
+Conference attendee discovery
+Local professional communities
 
 ## Business Logic
-[Sustainability/monetization considerations]
+
+Allow users to purchase a portal without GPS
+Selling ticket NFTs for events
+Solutions for communal gatherings
 
 ## What's Next
-[Future development plans]
+Decentralized message storage
+Integration with events
+Community-driven map add-ons
