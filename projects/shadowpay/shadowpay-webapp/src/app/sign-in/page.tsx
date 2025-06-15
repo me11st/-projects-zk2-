@@ -59,7 +59,7 @@ export default function SignInPage() {
           </div>
 
           {/* Role Selection Cards */}
-          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Employer Card */}
             <Card 
               className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-teal-500/10 hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/20 border border-green-400/20 hover:border-green-400/40 p-8 text-center shadow-2xl shadow-green-500/10 hover:shadow-green-500/20 transition-all duration-300 group cursor-pointer"
@@ -95,7 +95,7 @@ export default function SignInPage() {
             </Card>
 
             {/* Auditor Card */}
-            <Card 
+            {/* <Card 
               className="backdrop-blur-xl bg-gradient-to-br from-purple-500/10 via-violet-500/5 to-fuchsia-500/10 hover:from-purple-500/20 hover:via-violet-500/10 hover:to-fuchsia-500/20 border border-purple-400/20 hover:border-purple-400/40 p-8 text-center shadow-2xl shadow-purple-500/10 hover:shadow-purple-500/20 transition-all duration-300 group cursor-pointer"
               onClick={() => handleRoleClick('auditor')}
             >
@@ -109,7 +109,7 @@ export default function SignInPage() {
               <div className="text-sm text-purple-400 font-medium">
                 {isConnected ? 'Enter Auditor Portal →' : 'Click to Connect & Continue →'}
               </div>
-            </Card>
+            </Card> */}
           </div>
         </section>
       </div>
