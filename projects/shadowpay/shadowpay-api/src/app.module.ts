@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { PayoutModule } from './payout/payout.module';
+import { WithdrawModule } from './withdraw/withdraw.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { PayoutModule } from './payout/payout.module';
       synchronize: true,
     }),
     PayoutModule,
+    WithdrawModule,
   ],
   controllers: [AppController],
   providers: [AppService],
