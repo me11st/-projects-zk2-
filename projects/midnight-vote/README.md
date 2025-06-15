@@ -1,6 +1,6 @@
 # Midnight Vote
 
-- **Track(s):** [Choose one or two from above]
+- **Track(s):** Censorship Resistance, Public Goods
 - **Team/Contributors:** Armando Medina
 - **Repository:** https://github.com/armsves/midnightVotingW3PN
 - **Demo:** [Link to live demo, video, or screenshots]
