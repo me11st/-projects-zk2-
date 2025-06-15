@@ -3,7 +3,7 @@
 - **Track(s):** PublicGoods 
 - **Team/Contributors:** Leo Franklin 
 - **Repository:** [https://github.com/LeoFranklin015/StealthGrants](https://github.com/LeoFranklin015/StealthGrants)  
-- **Demo:** [https://stealthgrant.xyz](https://stealthgrant.xyz) or [Demo Video Link]  
+- **Demo:** [Youtube](https://youtu.be/GYrSA0M-naE)
 
 ---
 
