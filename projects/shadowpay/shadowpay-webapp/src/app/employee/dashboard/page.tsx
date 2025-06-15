@@ -154,7 +154,7 @@ function EmployeeDashboardClient({ isConnected, onWithdraw }: { isConnected: boo
                 </div>
             </DialogContent>
         </Dialog>
-    </div>
+        </div>
   )
 }
 
@@ -224,7 +224,7 @@ export default function EmployeeDashboard() {
           console.error('Error during withdrawal:', error);
           return { success: false };
       }
-    }
+  }
 
   return (
     <div className="dark min-h-screen bg-black">
