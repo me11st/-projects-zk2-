@@ -2,9 +2,9 @@ Identity-Locked Social Recovery accessible to everyone!
 
 •	Track(s):   6 - Design (UI/UX), 7- User on boarding
 
-•	Team/Contributors: S (privacy matters)
+•	Team/Contributors: (privacy matters) signal handle: S001.28
 
-•	Repository: xxxxxxxxxxxxxxxx
+•	Repository: Private — insufficient time to clean and anonymize the code before submission.
 
 •	Demo: [ https://streamable.com/a0b10a ] (will expire at 17.06.25)
 
