@@ -3,7 +3,7 @@
 - **Track(s):** Censorship Resistance, Public Goods
 - **Team/Contributors:** Armando Medina
 - **Repository:** https://github.com/armsves/midnightVotingW3PN
-- **Demo:** [Link to live demo, video, or screenshots]
+- **Demo:** https://www.canva.com/design/DAGqbCsoo4Q/NEYgKQbQjkb-8JrUh_KjLg/view?utm_content=DAGqbCsoo4Q&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5396437cab
 
 ## Description (TL;DR)
 Midnight-Vote is a privacy-preserving voting platform for DAOs built on Midnight. It enables the creation of secure, anonymous polls where individual votes remain private, leveraging zero-knowledge cryptography to ensure fairness and prevent manipulation.
