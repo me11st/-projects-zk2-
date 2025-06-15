@@ -3,7 +3,8 @@
 - **Track(s):**  
   - Censorship Resistance – Tor, mixnets, Nostr, mesh networks  
   - Applied Encryption – Strengthen existing tools  
-- **Team/Contributors:** Erik Valle, Artur Vargas
+- **Team/Contributors:** Erik Valle (erikvalle.85 - t.me/erikvalle), Artur Vargas (t.me/lil_code)
+
 - **Repository:** [https://github.com/moclas17/private-NYMRPC](https://github.com/moclas17/private-NYMRPC)  
 - **Demo:** [Video demo coming soon]
 
