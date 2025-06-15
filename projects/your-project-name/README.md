@@ -1,6 +1,7 @@
 Identity-Locked Social Recovery
+
 •	Track(s):   6 - Design (UI/UX), 7- User on boarding
-•	Team/Contributors: S
+•	Team/Contributors: S (privacy matters)
 •	Repository: xxxxxxxxxxxxxxxx
 •	Demo: [Link to video demo or screenshots]
 ________________________________________
