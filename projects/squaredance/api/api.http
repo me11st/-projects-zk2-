@@ -25,8 +25,8 @@ POST http://localhost:3000/shares
 Content-Type: application/json
 
 {
-  "adminAddress": "0x1234567890abcdef1234567890abcdef12345678",
-  "contributorAddress": "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+  "adminAddress": "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
+  "contributorAddress": "0x0E801D84Fa97b50751Dbf25036d067dCf18858bF",
   "amount": 100,
   "encryptedCID": "bafybeihdwdcexamplecid"
 }

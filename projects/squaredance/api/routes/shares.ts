@@ -1,43 +1,71 @@
 import express from 'express';
 import { ethers } from 'ethers';
+import {decryptOCF, storeEncryptedOCF} from "../utils/ipfs";
+import {getDiamondAddress} from "../utils/diamond";
 
 const router = express.Router();
-const diamondAddress = process.env.DIAMOND_ADDRESS!;
+const diamondAddress = getDiamondAddress();
 
-router.post('/', async (req, res) => {
-    const { contributorAddress, amount, encryptedCID } = req.body;
+router.post("/", async (req, res) => {
     try {
-        const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+        const { to, amount, ocfData, passphrase } = req.body;
+
+        if (!to || !amount || !ocfData || !passphrase) {
+            return res.status(400).json({ error: "Missing required fields" });
+        }
+
+        const provider = new ethers.JsonRpcProvider("http://localhost:8545");
         const signer = await provider.getSigner();
 
-        const iface = new ethers.Interface([
-            "function issueShares(address to, uint256 amount, string encryptedCID)"
-        ]);
+        // Encrypt and store OCF data
+        const cid = await storeEncryptedOCF(ocfData, passphrase);
 
-        const contract = new ethers.Contract(diamondAddress, iface, signer);
-        const tx = await contract.issueShares(contributorAddress, amount, encryptedCID);
+        // Call contract
+        const abi = [
+            "function issueShares(address to, uint256 amount, string memory cid)"
+        ];
+        const contract = new ethers.Contract(diamondAddress, abi, signer);
+
+        const tx = await contract.issueShares(to, amount, cid);
         await tx.wait();
 
-        res.status(200).json({ message: `Issued ${amount} shares`, contributorAddress });
+        res.status(201).json({ message: "Shares issued", cid });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Failed to issue shares' });
+        res.status(500).json({ error: "Failed to issue shares." });
     }
 });
 
-router.get('/:address', async (req, res) => {
-    const { address } = req.params;
+router.get("/:address", async (req, res) => {
     try {
-        const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
-        const iface = new ethers.Interface([
+        const { address } = req.params;
+        const passphrase = req.query.passphrase as string;
+
+        if (!passphrase) return res.status(400).json({ error: "Missing passphrase" });
+
+        const provider = new ethers.JsonRpcProvider("http://localhost:8545");
+
+        const abi = [
             "function getMyShares() view returns (tuple(uint256 amount, string cid)[])"
-        ]);
-        const contract = new ethers.Contract(diamondAddress, iface, provider);
+        ];
+        const contract = new ethers.Contract(diamondAddress, abi, await provider.getSigner(address));
         const shares = await contract.getMyShares();
-        res.status(200).json({ address, shares });
+
+        const decryptedOCFs = await Promise.all(
+            shares.map(async (s: any) => {
+                const ocf = await decryptOCF(s.cid, passphrase);
+                return {
+                    amount: s.amount.toString(),
+                    cid: s.cid,
+                    ocf
+                };
+            })
+        );
+
+        res.json(decryptedOCFs);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Failed to fetch shares' });
+        res.status(500).json({ error: "Failed to retrieve or decrypt shares." });
     }
 });
 
