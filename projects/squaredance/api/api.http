@@ -32,5 +32,5 @@ Content-Type: application/json
 }
 
 ### Get shares for address
-GET http://localhost:3000/shares/0x0E801D84Fa97b50751Dbf25036d067dCf18858bF
+GET http://localhost:3000/shares/0x0E801D84Fa97b50751Dbf25036d067dCf18858bF?passphrase=yourPassphrase
 ```

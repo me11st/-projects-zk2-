@@ -1,7 +1,6 @@
-import { HardhatUserConfig } from "hardhat/config";
-import "@nomicfoundation/hardhat-toolbox";
+const { toolbox } = require("@nomicfoundation/hardhat-toolbox");
 
-const config: HardhatUserConfig = {
+module.exports = {
     solidity: "0.8.20",
     paths: {
         sources: "./contracts",
@@ -13,5 +12,3 @@ const config: HardhatUserConfig = {
         hardhat: {},
     },
 };
-
-export default config;

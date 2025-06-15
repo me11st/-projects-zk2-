@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "start-local-node": "npx hardhat node",
     "dev": "tsx api/index.ts",
     "compile": "hardhat compile",
     "test": "hardhat test",
-    "deploy": "hardhat run scripts/deploy.ts --network localhost",
-    "start-local-node": "npx hardhat node"
+    "deploy": "hardhat run scripts/deploy.ts --network localhost"
   },
   "dependencies": {
     "cid": "github:multiformats/cid",

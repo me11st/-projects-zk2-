@@ -1,7 +1,7 @@
-# [Project Name]
+# Squaredance Captable
 
-- **Track(s):** [Choose one or two from above]
-- **Team/Contributors:** [All who contributed - diverse skills welcomed]
+- **Track(s):** Censorship resistance, Applied Encryption, Privacy, Decentralized Identity
+- **Team/Contributors:** Artiom Chaplygin
 - **Repository:** [Link to your code repository]
 - **Demo:** [Link to live demo, video, or screenshots]
 

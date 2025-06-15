@@ -1,5 +1,6 @@
 import "@nomiclabs/hardhat-ethers";
-import { ethers } from "hardhat";
+import pkg from "hardhat";
+const { ethers } = pkg;
 import {FunctionFragment} from "ethers";
 import fs from 'fs';
 
