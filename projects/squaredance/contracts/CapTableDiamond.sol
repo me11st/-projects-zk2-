@@ -10,7 +10,7 @@ contract CapTableDiamond {
 
         // Add the diamondCut external function from the DiamondCutFacet
         IDiamondCut.FacetCut[] memory cut = new IDiamondCut.FacetCut[](1);
-        bytes4 ;
+        bytes4[] memory functionSelectors = new bytes4[](1);
         functionSelectors[0] = IDiamondCut.diamondCut.selector;
 
         cut[0] = IDiamondCut.FacetCut({
