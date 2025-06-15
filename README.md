@@ -1,61 +1,148 @@
-# Hopline
+# Project Submissions - W3PN_Hacks @ Berlin 2025
 
-- **Tracks:**
-  -   Design (UI/UX) - Better privacy app experiences
-  -   User Onboarding - Improving privacy tech adoption
-- **Team/Contributors:**
-  - [tolbrino - Core dev](https://github.com/tolbrino)
-  - [mjadach - Fullstack dev](https://github.com/mjadach-iv)
-  - [ilge ustun - Dapp dev](https://github.com/ilge-ustun)
-  - [1uiz - UI/UX design](https://github.com/1uizeth)
-- **Repos:** 
-  - [UI](https://github.com/hoprnet/gnosis-vpn-ui-electron)
-  - [VPN Binaries](https://github.com/gnosis/gnosis_vpn-client)
-  - [Mixnet](https://github.com/hoprnet/hoprnet)
-  - [Figma file](https://www.figma.com/design/k7EuEj4gBcojWkuez55FI3/Hopline?node-id=9-41&t=53m0hgs6fhaxaxKf-1)
-- **Demo:**
-  - [Video](https://drive.google.com/file/d/1-kIzaZIKjC5XRUXZL66TPbU7m-IPGygD/view?usp=sharing)
-  - [Presentation](https://www.figma.com/slides/rfNRzGdbk2ScoSATIMuQ5J/Hopline?node-id=1-114&t=tHDDcplIcPmsXy3N-1)
-  - [Figma prototype](https://www.figma.com/proto/k7EuEj4gBcojWkuez55FI3/Hopline?page-id=9%3A41&node-id=73-690&p=f&viewport=-387%2C279%2C0.39&t=6QfTzSARG7o0GAS5-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=69%3A413)
+📅 **June 13-15, 2025** | 🏆 **€30,000 Prize Pool** | 🏠 **Berlin, Germany**
 
+- 🌐 [Hackathon Website](https://hackathon.web3privacy.info/)
+- 📋 [Hackathon Manifesto](https://hackathon.web3privacy.info/info)
+- 📖 [Hacker Manual](https://hackathon.web3privacy.info/manual) ← RTFM!
 
-![Image](https://github.com/1uizeth/Hopline/blob/d3d2421addf98891650f9453d5424ac11772c11c/hopline.png)
+---
 
-## TL;DR
-Hopline is a user-friendly interface for GnosisVPN, built on HOPR’s decentralized mixnet. While the core VPN binaries already existed, they were previously accessible only via CLI. With Hopline, we’re making enterprise-grade privacy accessible to everyday users by introducing a clean UI, intelligent onboarding, and progressive disclosure—transforming the experience from technical to intuitive.
+## 🚀 How to Submit
+
+1. **Fork this repository**
+2. **Create a folder** with your project namie: `/projects/your-project-name/`
+3. **Copy the submission template** ([see below](#-submission-template))
+4. **Submit via Pull Request (PR)** before deadline
+
+What's next?
+- **Prepare for [Project Presentations](#-project-presentations)** - get ready to present your project after submissions close
+- **Share openly** - help others and get help
+
+### ⏰ Submission Deadline
+**Sunday, June 15, 2025 at 16:00 CEST** ([countdown](https://time.is/countdown/16:00_15_June_2025))
+
+*We encourage everyone to send a Pull Request with Submission earlier than a few minutes before the deadline to allow for fixes and avoid disqualification based on missing information.*
+
+> **⚠️ Important:** Keep your project repository/demo public and accessible for at least 14 days after the hackathon ends.
+
+### 🎤 Project Presentations
+**After the submission deadline**, all teams must be prepared to present their submitted projects to judges.
+
+More information: [📊 Judging Process](https://github.com/web3privacy/hackathon-2025-berlin/blob/main/README.md#-submissions--judging-process) @ Hacker Manual
+
+### ⚖️ Judging
+All submissions will be evaluated by expert judges according to the [Judging Criteria](https://github.com/web3privacy/hackathon-2025-berlin/blob/main/README.md#%EF%B8%8F-judging-criteria) after the deadline and the project presentations.
+
+## 📋 Project folder
+
+Your project folder must include:
+- `README.md` (using our [template](#-submission-template))
+
+Your project folder can include:
+- Presentation files (`.odp/.odg/.otp` preferred)
+- Any additional documentation
+
+## 🛠️ Tracks
+
+Choose one/two track(s) for your submission ([see detailed descriptions](https://github.com/web3privacy/hackathon-2025-berlin/blob/main/README.md#%EF%B8%8F-hackathon-tracks)):
+
+1. **Advanced Cryptography** - MPC, TEE, ZK, DID, FHE
+2. **Censorship Resistance** - Tor, mixnets, Nostr, mesh networks
+3. **Applied Encryption** - Strengthen existing tools
+4. **Privacy-First AI** - Secure AI interactions
+5. **Public Goods** - Privacy-preserving public infrastructure
+6. **Design (UI/UX)** - Better privacy app experiences
+7. **User Onboarding** - Improving privacy tech adoption
+
+## 📝 Submission Template
+
+Copy this template to your project's `README.md`:
+
+```markdown
+# [Project Name]
+
+- **Track(s):** [Choose one or two from above]
+- **Team/Contributors:** [All who contributed - diverse skills welcomed]
+- **Repository:** [Link to your code repository]
+- **Demo:** [Link to live demo, video, or screenshots]
+
+## Description (TL;DR)
+[Brief description of your project]
 
 ## Problem
-Web3 privacy tools often force a trade-off between usability and technical sophistication. GnosisVPN, powered by HOPR’s robust decentralized mixnet, previously existed only as command-line binaries—limiting access to technically proficient users. There was a clear need for an intuitive interface that brings powerful, decentralized privacy to a wider audience without compromising the advanced routing and anonymity features HOPR provides.
+[What problem does this solve?]
 
 ## Solution
-A progressive disclosure UX that gradually introduces HOPR's complexity as users become more comfortable. Start with simple "connect and go" experience, then reveal mixnet routing, hub selection, and advanced privacy controls as users explore. Smart defaults handle optimization automatically while preserving access to full manual control.
-
-![Image](https://github.com/1uizeth/Hopline/blob/4685023500bcdc8b8fdae895dbbcd6ba93da0ad1/UI_hopline.png)
+[How does your project address the problem?]
 
 ## Technology Stack
-- HOPR Protocol: Decentralized mixnet infrastructure providing metadata privacy
-- GnosisVPN: VPN layer built on HOPR's network
-- Progressive Onboarding: Layered interface revealing complexity gradually
-- Local Intelligence: On-device traffic analysis for routing optimization
-- Adaptive UX: Interface complexity scales with user engagement and expertise
-- Desktop UI: Electron and React
+[List technologies, frameworks, libraries used]
 
 ## Privacy Impact
-Combines HOPR's metadata privacy with traditional VPN traffic encryption. Multi-hop routing through HOPR's decentralized node network eliminates single points of failure. Local-only intelligence ensures no behavioral data leaves user's device while optimizing HOPR route selection.
+[How does this improve privacy?]
 
 ## Real-World Use Cases
-- Web3 Users: Secure DeFi transactions leveraging HOPR's mixnet privacy
-- Mainstream Adoption: Making HOPR's enterprise privacy accessible to non-technical users
-- Content Access: Geographic routing through HOPR's global node network
-- Enterprise Privacy: HOPR-grade metadata protection with familiar VPN interfaces
-- Privacy Advocates: Maximum protection through HOPR's proven infrastructure
+[Who would use this and how?]
 
 ## Business Logic
-Built on HOPR's existing token economics and node operator incentives. Interface design accelerates mainstream adoption of HOPR infrastructure. Sustainable through HOPR's proven network economics while expanding user base beyond technical communities.
+[Sustainability/monetization considerations]
 
 ## What's Next
-- Integrate design with GnosisVPN's HOPR-based backend
-- Develop HOPR node selection algorithms for optimal routing
-- Create onboarding flows that educate users about HOPR's privacy benefits
-- Implement HOPR network health indicators in the interface
-- Launch with existing HOPR community for validation and feedback
+[Future development plans]
+```
+
+---
+
+## 📋 Submission Rules
+
+### ⏰ Deadline
+- **Hard deadline:** Sunday, June 15, 2025 at 16:00 CEST
+- **No late submissions accepted**
+- Pull requests must be created before deadline
+
+### 📁 Format Requirements
+- **One project per Pull Request**
+- **Folder naming:** `/projects/your-project-name/` (no spaces, use hyphens)
+- **Required files:** README.md
+
+### 🛠️ Technical Rules
+- **Tech-agnostic:** Use any programming language, framework, or protocol
+- **Chain-agnostic:** No restrictions on blockchain platforms
+-	**Open source encouraged** (but not mandatory)
+
+### 👥 Team Rules
+- **Individual or team submissions** welcome
+- **Team size:** No limits, consider collaboration over competition
+- **Cross-team collaboration** encouraged
+- **One submission per team/individual**
+
+### ✅ Content Requirements
+- **Original work:** Created during the hackathon (June 13-15)
+- **Track selection:** Choose one or two tracks for judging
+- **Complete template:** All sections must be filled
+- **Working links:** Repository and demo links must be accessible
+- **Privacy focus:** Must address privacy improvements
+- **Repository persistence:** Keep your project repository/demo public and accessible for at least 14 days after the hackathon
+
+### 🚫 Not Allowed
+- **Pre-existing projects** (unless significantly extended during hackathon)
+- **Plagiarism or copying** existing solutions
+- **Incomplete submissions** missing required components
+- **Commercial promotions** without technical innovation
+
+---
+
+## 🆘 Help & Support
+
+**No GitHub account?** Technical issues? Question?
+
+Contact our submissions coordinator **Tree** via [Signal](https://signal.me/#eu/08P5JDn8VtVDLDpFl0ihILAxoYu0fNa7kEVimHlvbZTRiNQflwtNM5FbhCDG0BKJ) for assistance.
+
+---
+
+Good luck and happy hacking! 🔥
+
+*Read the [Hacker Manual](https://github.com/web3privacy/hackathon-2025-berlin/blob/main/README.md) for complete event details.*
+
+> "Cypherpunks write code. We publish our code so that our fellow Cypherpunks may practice and play with it." - Eric Hughes
