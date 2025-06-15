@@ -3,7 +3,7 @@
 - **Track:** Applied Encryption, Public Goods
 - **Team/Contributors:** Levan Ilashvili, Guy at the Coffee Stand
 - **Repository:** https://github.com/LevanIlashvili/hackathon-2025-berlin-submissions
-- **Demo:** 
+- **Demo:** https://pitch.com/v/shadowpay-38envn 
 
 ## Description (TL;DR)
 ShadowPay enables confidential payroll on public blockchains. Employers pay in USDC on an Ethereum network, and our platform uses Aztec to privately distribute shielded tokens to employees. Employees can then withdraw their funds to a public address without creating an on-chain link to their employer, ensuring their salary details remain private.
