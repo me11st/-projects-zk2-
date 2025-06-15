@@ -1,4 +1,4 @@
-# [Project Name]
+# SNPools
 
 - **Track(s):** Advanced Cryptography, Privacy-First AI
 - **Team/Contributors:**
