@@ -1,6 +1,6 @@
 # StealthGrant
 
-- **Track(s):** PublicGoods, Censorship Resistant
+- **Track(s):** PublicGoods, Censorship Resistance
 - **Team/Contributors:** Leo Franklin 
 - **Repository:** [https://github.com/LeoFranklin015/StealthGrants](https://github.com/LeoFranklin015/StealthGrants)  
 - **Demo:** [Youtube](https://youtu.be/GYrSA0M-naE)
