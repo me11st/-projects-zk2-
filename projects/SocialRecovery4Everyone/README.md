@@ -23,9 +23,11 @@ ________________________________________
 
 NO technical friends / family members which can act as Guradians ->>>  NO Social recovery!
 
+
 Or a bit more in detail:
 
 Digital Seed phrase based social recovery which is also identity locked(only the original owner can recover) is  NOT  accessible to people with non technical friends/family members.
+
 
 Even more detail:
 
