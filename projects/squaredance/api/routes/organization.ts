@@ -20,10 +20,15 @@ router.post('/', async (req, res) => {
         const diamond = await diamondFactory.deploy(adminAddress, ethers.ZeroAddress);
         await diamond.waitForDeployment();
 
-        const diamondAddress = await diamond.getAddress();
+        // const diamondAddress = await diamond.getAddress();
+        const diamondAddress = "0x67d269191c92Caf3cD7723F116c85e6E9bf55933"
         console.log(`Diamond deployed at: ${diamondAddress}`);
 
-        const adminFacet = new ethers.Contract(diamondAddress, adminFacetArtifact.abi, signer);
+        // Get clean ABI only with the desired functions
+        const iface = new ethers.Interface([
+            "function createOrganization(string name, uint256 shares)"
+        ]);
+        const adminFacet = new ethers.Contract(diamondAddress, iface, signer);
         const tx = await adminFacet.createOrganization(name, initialShares);
         await tx.wait();
 

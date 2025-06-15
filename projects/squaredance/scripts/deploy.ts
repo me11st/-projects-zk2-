@@ -30,10 +30,11 @@ async function main() {
     // Step 4: Call diamondCut to add AdminFacet
     const diamondCut = await ethers.getContractAt("IDiamondCut", diamondAddress);
 
-    const selectors = AdminFacet.interface.fragments
-        .filter((f) => f.type === 'function')
-        .map((f) =>
-            AdminFacet.interface.getFunction((f as FunctionFragment).name)?.selector);
+    const iface = AdminFacet.interface;
+    const selectors = iface.fragments
+        .filter((f): f is FunctionFragment => f.type === 'function')
+        .map((f) => iface.getFunction(f.name)?.selector);
+    console.log("AdminFacet selectors:", selectors);
 
     const cut = [{
         facetAddress: adminFacetAddress,
