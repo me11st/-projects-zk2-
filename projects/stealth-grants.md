@@ -1,6 +1,6 @@
 # StealthGrant
 
-- **Track(s):** PublicGoods 
+- **Track(s):** PublicGoods, Censorship Resistant
 - **Team/Contributors:** Leo Franklin 
 - **Repository:** [https://github.com/LeoFranklin015/StealthGrants](https://github.com/LeoFranklin015/StealthGrants)  
 - **Demo:** [Youtube](https://youtu.be/GYrSA0M-naE)
@@ -20,6 +20,8 @@ Despite the promise of quadratic funding, current platforms suffer from critical
 - **Popularity Bias:** Early visibility or influencer support can cause a runaway effect—popular projects receive more funding not because they’re better, but because they’re louder. This undermines the goal of funding true public goods.
 - **Sybil Attacks:** Platforms without strong identity guarantees are prone to fake accounts, skewing the “number of contributors” metric to drain matching pools.
 - **Zero Privacy:** Contributions are publicly visible, discouraging donations from individuals who value anonymity or fear backlash.
+
+- **CensorShip Resistance :** : If you belong to country , we can prevent them from participating , using Self ZK-Passport
 
 These limitations make quadratic funding less effective and inclusive, especially in sensitive ecosystems.
 
