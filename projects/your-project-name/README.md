@@ -1,10 +1,15 @@
 Identity-Locked Social Recovery
 
 •	Track(s):   6 - Design (UI/UX), 7- User on boarding
+
 •	Team/Contributors: S (privacy matters)
+
 •	Repository: xxxxxxxxxxxxxxxx
+
 •	Demo: [Link to video demo or screenshots]
+
 ________________________________________
+
 📝 Description (TL;DR)
 Social recovery is finally accessible to everyone!
 Identity locked social recovery that is accessible for non-technical users with non-technical friends/family— no passwords, no on-chain footprint, no crypto-native guardians needed. Instead, your face + friends/family enable private, off-chain seedphrase recovery.
