@@ -3,7 +3,7 @@
 - **Track(s):** Public Goods and Design UI/UX
 - **Team/Contributors:** Me :) Agustin Schiariti
 - **Repository:** [LiveBlur Repo](https://github.com/Podima2/W3PN)
-- **Demo:** [Link to live demo, video, or screenshots]
+- **Demo:** [Presentation, Video Demo and other Media](https://www.canva.com/design/DAGqbcGuQzk/gxJAfrR82XEV0_em5NOoaA/edit?utm_content=DAGqbcGuQzk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## Description (TL;DR)
 Intercepting the Meta Rayban Wayfarer LiveStream (BEFORE going live on IG), redirected to LiveBlur and then all faces are blurred! Subjects in the stream can dictate their privacy preferences and even demand payment for unblurring.
