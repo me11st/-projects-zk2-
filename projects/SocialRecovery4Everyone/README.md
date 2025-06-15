@@ -6,7 +6,7 @@ Identity-Locked Social Recovery accessible to everyone!
 
 •	Repository: xxxxxxxxxxxxxxxx
 
-•	Demo: [Link to video demo or screenshots]
+•	Demo: [ https://streamable.com/a0b10a ] (will expire at 17.06.25)
 
 ________________________________________
 
