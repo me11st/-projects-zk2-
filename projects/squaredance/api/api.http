@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
   "name": "TestOrg",
-  "adminAddress": "0x1234567890abcdef1234567890abcdef12345678",
+  "adminAddress": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
   "initialShares": 1000
 }
 
