@@ -1,9 +1,8 @@
 # [Gnosis VeilPay]
 
-- **Track(s):** [Choose one or two from above]
+- **Track(s):** [Applied Encryption]
 - **Team/Contributors:** Sebastian, Druv and Mohammed  
 - **Repository:** https://github.com/mohammed7s/gnosis-Veilpay
-- **Demo:** [Link to live demo, video, or screenshots]
 
 ## Description (TL;DR)
 
@@ -21,7 +20,6 @@ Among all the noncustodial crypto cards none of them are private. They are susce
 This article is a nice summary of it: https://tzedonn.substack.com/p/22-crypto-cards-will-get-you-robbed
 
 ## Solution
-[How does your project address the problem?]
 
 Hackathon solution: Aztec rollup on EVM already has tooling for privacy sets so for hack, we wrote the gnosis pay logic of the smart contract wallet in Noir smart contract and deployed on Aztec. 
 
@@ -31,7 +29,6 @@ Hackathon solution: Aztec rollup on EVM already has tooling for privacy sets so 
 Ideal solution: No need for full Aztec to be a rollup on Gnosis Chain, can construct a lean subset of the full Aztec suite and construct a lean shielded pool/privacy pools framework.
 
 ## Technology Stack
-[List technologies, frameworks, libraries used]
 
 Noir Lang 
 Aztec JS
@@ -44,7 +41,6 @@ This allows for noncustodial crypto cards to offer a card solution on par with h
 
 
 ## Real-World Use Cases
-[Who would use this and how?]
 
 All Gnosis Pay card users would benefit and UX for them is exactly the same. They top up the wallet with Monerium's GBPe or EURe on Gnosis Chain, and users start using it in same way. 
 
