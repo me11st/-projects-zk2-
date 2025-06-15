@@ -1,0 +1,6 @@
+[submodule "projects/ProofLeak/proof-platform-zero"]
+	path = projects/ProofLeak/proof-platform-zero
+	url = https://github.com/d-c-19/proof-platform-zero.git
+	branch = "main"
+	fetchRecurseSubmodules = true
+	
