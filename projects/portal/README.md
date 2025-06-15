@@ -3,7 +3,7 @@
 - Track(s): Public Goods, Censorship Resistance
 - Team/Contributors: sunsakis, belakm, yellowBirdy, weboko
 - Repository: https://github.com/sunsakis/portal
-- Demo: https://github.com/sunsakis/portal - https://portal.live coming soon, static files ready but not deployed yet due to some errors so for now please run locally from our GitHub
+- Demo: https://github.com/sunsakis/portal - https://portal.live coming soon, video link for now: [https://drive.google.com/file/d/19GVzQL4cwm5fAWaNVpbrvVpjrDeeJNAM/view?usp=sharing](https://drive.google.com/file/d/19GVzQL4cwm5fAWaNVpbrvVpjrDeeJNAM/view?usp=sharing)
 
 ## Description (TL;DR)
 A decentralized location-based chat app where users can chat with people nearby via P2P messaging without storing personal data or tracking movement.
